@@ -1,0 +1,19 @@
+# Python caches and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*$py.class
+build/
+dist/
+*.spec
+
+# Editors and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Runtime logs
+*.log
+启动日志.txt

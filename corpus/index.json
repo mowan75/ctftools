@@ -1,0 +1,2543 @@
+{
+ "generated_at": "2026-10-09 23:44:39",
+ "source": "https://github.com/sajjadium/ctf-archives (公开 CTF 归档)",
+ "count": 159,
+ "total_bytes": 57668659,
+ "challenges": [
+  {
+   "id": "ctf-archives:0CTF/2025/misc/Motion_Blur",
+   "ctf": "0CTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Motion_Blur",
+   "dir": "0CTF/2025/misc/Motion_Blur",
+   "description": "It is rumored that blurring sensitive information is unsafe...\n\nFlag format: 0ctf{.*}\n",
+   "files": [
+    "13fefbc7-ec71-47fa-a469-f508b0146e9e.webp",
+    "README.md"
+   ],
+   "known_flag": "0ctf{.*}",
+   "size": 811964,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:0xFUN/2026/forensic/Bard",
+   "ctf": "0xFUN",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Bard",
+   "dir": "0xFUN/2026/forensic/Bard",
+   "description": "x03e\n\nThe Simpsons is an old show, and Bard comes across as a bit strange.\n",
+   "files": [
+    "Bart.jpg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 7128,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:0xFUN/2026/misc/Broken_Piece",
+   "ctf": "0xFUN",
+   "year": "2026",
+   "category": "misc",
+   "name": "Broken_Piece",
+   "dir": "0xFUN/2026/misc/Broken_Piece",
+   "description": "x03e\n\nAnyway to recover the QR code since it seems broken.\n",
+   "files": [
+    "README.md",
+    "secret_id.png"
+   ],
+   "known_flag": null,
+   "size": 2353506,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:0xFUN/2026/forensic/Ghost",
+   "ctf": "0xFUN",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Ghost",
+   "dir": "0xFUN/2026/forensic/Ghost",
+   "description": "x03e\n\nThe interception of a transmission has occurred, with only a network capture remaining. Recover the flag before the trail goes cold.\n",
+   "files": [
+    "README.md",
+    "wallpaper.png"
+   ],
+   "known_flag": null,
+   "size": 61582,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:1337UP/2023/misc/ZeChat",
+   "ctf": "1337UP",
+   "year": "2023",
+   "category": "misc",
+   "name": "ZeChat",
+   "dir": "1337UP/2023/misc/ZeChat",
+   "description": "I'm told people might be able to exfiltrate data but I don't understand what this image has to do with anything. Ah well, I'll rest easy knowing our flags are safe 🥱\n",
+   "files": [
+    "README.md",
+    "zechat.png"
+   ],
+   "known_flag": null,
+   "size": 129241,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:1337UP/2024/misc/In_Plain_Sight",
+   "ctf": "1337UP",
+   "year": "2024",
+   "category": "misc",
+   "name": "In_Plain_Sight",
+   "dir": "1337UP/2024/misc/In_Plain_Sight",
+   "description": "created by CryptoCat\n\nBarely hidden tbh..\n",
+   "files": [
+    "README.md",
+    "meow.jpg"
+   ],
+   "known_flag": null,
+   "size": 2147040,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:24hCTF/2024/steg/Inkblot",
+   "ctf": "24hCTF",
+   "year": "2024",
+   "category": "steg",
+   "name": "Inkblot",
+   "dir": "24hCTF/2024/steg/Inkblot",
+   "description": "Octomany\n\nDans les ombres de la prison, un prisonnier vous approche et vous présente une image. Il dit que si vous parvenez à extraire l'information qu'elle contient, il pourra peut-être vous aider à vous échapper...\n\nIn the shadows of the prison, a prisoner approaches you and presents you with an image. He says that if you manage to extract the information it contains, he could help you escape...\n",
+   "files": [
+    "README.md",
+    "paper.png"
+   ],
+   "known_flag": null,
+   "size": 1796221,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:4TS/2024/misc/Water_on_Mars",
+   "ctf": "4TS",
+   "year": "2024",
+   "category": "misc",
+   "name": "Water_on_Mars",
+   "dir": "4TS/2024/misc/Water_on_Mars",
+   "description": "Something seems weird with this picture...\n\nThe flag should be wrapped with 4T${}\n",
+   "files": [
+    "README.md",
+    "mars.jpg"
+   ],
+   "known_flag": null,
+   "size": 677233,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ATCWinterVibesCommunity/2026/forensic/Elfs_Snapshot",
+   "ctf": "ATCWinterVibesCommunity",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Elfs_Snapshot",
+   "dir": "ATCWinterVibesCommunity/2026/forensic/Elfs_Snapshot",
+   "description": "A tiny file hides a message for Santa's eyes only. A souvenir file from the North Pole. Something's inside it.\n",
+   "files": [
+    "README.md",
+    "elfsnapshot.png"
+   ],
+   "known_flag": null,
+   "size": 232,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:AirOverflow/2024/forensic/Blurry",
+   "ctf": "AirOverflow",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Blurry",
+   "dir": "AirOverflow/2024/forensic/Blurry",
+   "description": "I accidentally forgot to bring my glasses, can you help me view this QR?\n\nAuthor: TheGriffyn\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": null,
+   "size": 151400,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ApoorvCTF/2025/misc/Lost_in_Encryption",
+   "ctf": "ApoorvCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Lost_in_Encryption",
+   "dir": "ApoorvCTF/2025/misc/Lost_in_Encryption",
+   "description": "While traveling on the 22647 train, nearing Chennai, I captured an image of a place with an intriguing tower-like structure. Just as I was about to admire it, my ever-annoying brother decided to play a cruel joke—he encrypted the image using ECB and, to make things worse, turned the key into an incomprehensible mess of symbols: D'O_#\">JmH|zWxgBSRcr=);L9%I)Gi~Dedzy~>|;)(8wYotmrk1oQzOkd*ha'H^]\\\"`_^]?>TxXWVUTS5Ko2HGFKDh+AeEDC%;_\"8\\<5:98D05.Rs10)('K+*)(h~%|B\"baw={]\\r8pot\"lqj0nmOkjib(Ie^$b[CY}]\\>=YXQuUT6LpP2HMFEiIHG@?c&B;@9>=<;4XE Yeah… utter gibberish. Now, I’m left with an encrypted image and a scrambled key that makes no sense. Do you have what it takes to untangle this mess and find the name of the place where tower resides? 🕵️‍♂️ Example:\nBridage Gardens\nFlag: apoorvctf{brigade_gardens}\n\n    Author: Cosmicstar,NotAProton\n",
+   "files": [
+    "README.md",
+    "chall.jpg"
+   ],
+   "known_flag": "apoorvctf{brigade_gardens}",
+   "size": 81746,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ApoorvCTF/2025/misc/Petah_Hunt",
+   "ctf": "ApoorvCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Petah_Hunt",
+   "dir": "ApoorvCTF/2025/misc/Petah_Hunt",
+   "description": "Bro, who is this guy everyone’s talking about? He’s known for his shady antics and mastery of hidden secrets. Check out the image and see if you can uncover what he’s hiding.\n\n    Author: hampter\n",
+   "files": [
+    "README.md",
+    "petah.png"
+   ],
+   "known_flag": null,
+   "size": 260854,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ApoorvCTF/2026/misc/NP_Harder",
+   "ctf": "ApoorvCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "NP_Harder",
+   "dir": "ApoorvCTF/2026/misc/NP_Harder",
+   "description": "After drilling his whole life, Simon wanted something really hard to drill. So, of course, he turned to NP-Hard problems. However, he's a bit stuck, since this requires some Sciency-Fancy stuff for which you need to help him out.\n\nAuthor : accord\n",
+   "files": [
+    "README.md",
+    "drillthis.png"
+   ],
+   "known_flag": null,
+   "size": 26234,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ApoorvCTF/2026/forensic/The_Gotham_Files",
+   "ctf": "ApoorvCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "The_Gotham_Files",
+   "dir": "ApoorvCTF/2026/forensic/The_Gotham_Files",
+   "description": "A mysterious panel surfaced at this year's ComiCon. The artist left something behind.\n\nAuthor : n3twraith\n",
+   "files": [
+    "README.md",
+    "challenge.png"
+   ],
+   "known_flag": null,
+   "size": 921581,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BCACTF/2025/forensic/Flag_Flag",
+   "ctf": "BCACTF",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Flag_Flag",
+   "dir": "BCACTF/2025/forensic/Flag_Flag",
+   "description": "Written by Thomas Raskin\n\nIt's a flag—inside a flag.\n",
+   "files": [
+    "README.md",
+    "flag-flag.png"
+   ],
+   "known_flag": null,
+   "size": 1771,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BCACTF/2025/misc/Molasses",
+   "ctf": "BCACTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Molasses",
+   "dir": "BCACTF/2025/misc/Molasses",
+   "description": "Written by Thomas Raskin\n\nThis GIF shows the flag letter-by-letter but it's really slow and I don't want to wait all day. Maybe there's a faster way to get the flag?\n",
+   "files": [
+    "README.md",
+    "molasses.gif"
+   ],
+   "known_flag": null,
+   "size": 39787,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BCACTF/2025/forensic/its_all_there",
+   "ctf": "BCACTF",
+   "year": "2025",
+   "category": "forensic",
+   "name": "its_all_there",
+   "dir": "BCACTF/2025/forensic/its_all_there",
+   "description": "Written by Colin\n\nthis is a picture of my king. he knows where the flag is\n",
+   "files": [
+    "README.md",
+    "goonking.jpg"
+   ],
+   "known_flag": null,
+   "size": 69525,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BITSCTF/2025/forensic/Finders_Keepers",
+   "ctf": "BITSCTF",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Finders_Keepers",
+   "dir": "BITSCTF/2025/forensic/Finders_Keepers",
+   "description": "What even is this image bruh.\n\n    darthlazius@13\n",
+   "files": [
+    "README.md",
+    "weird.png"
+   ],
+   "known_flag": null,
+   "size": 704926,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BITSCTF/2026/forensic/Meow_Transmission",
+   "ctf": "BITSCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Meow_Transmission",
+   "dir": "BITSCTF/2026/forensic/Meow_Transmission",
+   "description": "yuthran\n\nOur surveillance team intercepted a seemingly innocent cat photo being transmitted between two suspected agents. The metadata contains some strange ramblings about cats and dancing...\n\nWe believe there's hidden information in this image, but standard tools haven't revealed anything useful. Can you uncover their secret?\n",
+   "files": [
+    "README.md",
+    "transmission.png"
+   ],
+   "known_flag": null,
+   "size": 4122,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BITSCTF/2026/misc/Wifies_Lover_1",
+   "ctf": "BITSCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "Wifies_Lover_1",
+   "dir": "BITSCTF/2026/misc/Wifies_Lover_1",
+   "description": "kekwman\n\nThe old capital is silent. Concrete skeletons stretch into the sky where surveillance towers once stood. The Government called it stability. The people called it control. Somewhere in the wreckage, the Resistance has rebuilt. Not openly. Not recklessly. You have received an image. The image is not decoration. It is not scenery. It is not random. It shows the location of a functioning Resistance relay — one of the few places where real technology still operates.\n\nUsage of the /guess Command /guess (Coordinate_X) (Coordinate_Y) (Coordinate_Z) For example if the coordinates were 100,100,100 the usage for /guess would be /guess 100 100 100 VERSION:1.21.8\n",
+   "files": [
+    "2026-02-19_00.20.22.png",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 2021549,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BKCTF/2026/misc/Appreciating_Graphic_Design",
+   "ctf": "BKCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "Appreciating_Graphic_Design",
+   "dir": "BKCTF/2026/misc/Appreciating_Graphic_Design",
+   "description": "Linaphora\nDid you know you can't make microsoft word art on a mac? I had to make them on my work computer\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 106,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BKCTF/2026/misc/Super_Dubs_Universe",
+   "ctf": "BKCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "Super_Dubs_Universe",
+   "dir": "BKCTF/2026/misc/Super_Dubs_Universe",
+   "description": "JRitz\nAfter his first journey, Dubs embarks on a new quest. To prepare for the changes along the way, the princess provides useful supplies.\n\nJoin Dubs on his quest and see what you find! You'll need to provide your own supplies, though, the princess only prepared for one..\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 275,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BSidesMumbai/2025/forensic/Author_Ki_PFP",
+   "ctf": "BSidesMumbai",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Author_Ki_PFP",
+   "dir": "BSidesMumbai/2025/forensic/Author_Ki_PFP",
+   "description": "Hey! Here is my PFP and I love using it everywhere. I wonder how you can make out the flag from this though…\n\nAuthor: 5h1kh4r\n",
+   "files": [
+    "Challenge.png",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 752703,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BSidesSF/2024/forensic/redacted",
+   "ctf": "BSidesSF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "redacted",
+   "dir": "BSidesSF/2024/forensic/redacted",
+   "description": "Forensics 101\n\nDon't worry, we've covered up all the secret bits to make this safe to share.\n\nAuthor: symmetric\n",
+   "files": [
+    "README.md",
+    "redacted.png"
+   ],
+   "known_flag": null,
+   "size": 584559,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BSidesSF/2024/forensic/ztxt",
+   "ctf": "BSidesSF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "ztxt",
+   "dir": "BSidesSF/2024/forensic/ztxt",
+   "description": "Forensics 101\n\nZe zhope zou zan zind zour zlag zin ztext zhunk\n\nAuthor: symmetric\n",
+   "files": [
+    "README.md",
+    "ztxt.png"
+   ],
+   "known_flag": null,
+   "size": 39744,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BSidesSF/2026/misc/crossworthy2026",
+   "ctf": "BSidesSF",
+   "year": "2026",
+   "category": "misc",
+   "name": "crossworthy2026",
+   "dir": "BSidesSF/2026/misc/crossworthy2026",
+   "description": "Solve the crossword in the program (or attached as an HTML file)! The flag is 70 across, in lowercase (surrounded by CTF{...})\n\nAuthor: ron\n",
+   "files": [
+    "README.md",
+    "clues.txt",
+    "crossworthy2026.html",
+    "grid.png",
+    "grid.svg"
+   ],
+   "known_flag": "CTF{...}",
+   "size": 238735,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BSidesTLV/2023/misc/The_dog_ate_my_QR",
+   "ctf": "BSidesTLV",
+   "year": "2023",
+   "category": "misc",
+   "name": "The_dog_ate_my_QR",
+   "dir": "BSidesTLV/2023/misc/The_dog_ate_my_QR",
+   "description": "Oh no! The dog ate my QR code!\nCan you help me decode it?\n",
+   "files": [
+    "Dog.png",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 63108,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BTCTF/2024/misc/osint_1_going_outside",
+   "ctf": "BTCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "osint_1_going_outside",
+   "dir": "BTCTF/2024/misc/osint_1_going_outside",
+   "description": "I decided to take a hike after all this stress going on. Find out what park I was in. Wrap your answer in btctf{}. Answer in all lowercase, with underscores replacing spaces\n",
+   "files": [
+    "README.md",
+    "water_updated.png"
+   ],
+   "known_flag": null,
+   "size": 680962,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BTCTF/2024/misc/osint_2_food",
+   "ctf": "BTCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "osint_2_food",
+   "dir": "BTCTF/2024/misc/osint_2_food",
+   "description": "After taking three AP exams in a row I was so hungry that I walked out to try to get food. Find the coordinates of the restaurant I was looking at. Use coordinates. btctf{N,W}\n\nTruncate so that the answer has the last remaining three digits. For example, use btctf{54.945, -111.826} if the coordinates are (54.94599730671245, -111.82651401323285)\n\ncreated by jp_var03\n",
+   "files": [
+    "README.md",
+    "street.png"
+   ],
+   "known_flag": "btctf{N,W}",
+   "size": 941031,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BTCTF/2024/forensic/scrambled",
+   "ctf": "BTCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "scrambled",
+   "dir": "BTCTF/2024/forensic/scrambled",
+   "description": "I had an egg, but it got scrambled by my dog, who left some magic bites... can you unscramble this egg???\n\ncreated by jp_var03\n",
+   "files": [
+    "README.md",
+    "scrambled.png"
+   ],
+   "known_flag": null,
+   "size": 152870,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BTCTF/2024/forensic/stegosaurus",
+   "ctf": "BTCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "stegosaurus",
+   "dir": "BTCTF/2024/forensic/stegosaurus",
+   "description": "I was able to photograph a famous cryptid known as Mokele Mbembe! Rumours say it is a stegosaurus, but to me it looks a bit off. Perhaps it could be hiding somehting?\n\ncreated by jp_var03\n",
+   "files": [
+    "README.md",
+    "mokele-mbembe.jpg"
+   ],
+   "known_flag": null,
+   "size": 82434,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BackdoorCTF/2023/misc/Beginner_menace",
+   "ctf": "BackdoorCTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "Beginner_menace",
+   "dir": "BackdoorCTF/2023/misc/Beginner_menace",
+   "description": "cy4n1d3\n\nGo off now and enjoy the 2 days of unlimited fun.\n",
+   "files": [
+    "README.md",
+    "friend.jpeg"
+   ],
+   "known_flag": null,
+   "size": 6515,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BackdoorCTF/2023/misc/Headache",
+   "ctf": "BackdoorCTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "Headache",
+   "dir": "BackdoorCTF/2023/misc/Headache",
+   "description": "Sl4y3r_07\n\nI've had a headache since last evening. Is there a magic spell that can cure it immediately?\n",
+   "files": [
+    "README.md",
+    "chal.png"
+   ],
+   "known_flag": null,
+   "size": 90010,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BackdoorCTF/2023/misc/Indecipherable_image_or_is_itq",
+   "ctf": "BackdoorCTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "Indecipherable_image_or_is_itq",
+   "dir": "BackdoorCTF/2023/misc/Indecipherable_image_or_is_itq",
+   "description": "7π4nd5R_G0d\n\nHow 'bout an easy Steg challenge, Just remember that brute-forcing is not an option!!\n",
+   "files": [
+    "README.md",
+    "cutie.png"
+   ],
+   "known_flag": null,
+   "size": 48638,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BackdoorCTF/2024/forensic/Roman_Xor.png",
+   "ctf": "BackdoorCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Roman_Xor.png",
+   "dir": "BackdoorCTF/2024/forensic/Roman_Xor.png",
+   "description": "Yesterday, I was reading about Julius Caesar, the mighty Roman General and got to know that he was assassinated. Do you know in which year he was assassinated? Do you know who he was most shocked at among his assassins? If you don't, you better find out and get me the flag!\n\nMeanwhile, I'll be on my merry way to watch Rowdy Gladiators Bleed and then I'll drink a bottle of Red wine.\n\nAuthor: zenitsu\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": null,
+   "size": 720458,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BackdoorCTF/2025/forensic/Fractonacci",
+   "ctf": "BackdoorCTF",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Fractonacci",
+   "dir": "BackdoorCTF/2025/forensic/Fractonacci",
+   "description": "Author: vx\n\nBeautiful. Red. Fractonacci. What could this mean??\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 64,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bauhinia/2023/misc/Telepathy",
+   "ctf": "Bauhinia",
+   "year": "2023",
+   "category": "misc",
+   "name": "Telepathy",
+   "dir": "Bauhinia/2023/misc/Telepathy",
+   "description": "hollow\n通心術\n埋於心底的一些往事\n記憶很鬼祟偷偷來暗示\nhttps://www.youtube.com/watch?v=AsmxdD7DNKU\n10 years ago, it was prophesied that the Earth is going to end soon. Some people then had chosen to move to the Mars. Today, you on the Earth, have received an image sent from the Mars, what are they trying to tell? How are they?\n",
+   "files": [
+    "README.md",
+    "the_forgiven_78b1fd9d24b374e5671be61f8ca610cc.jpg"
+   ],
+   "known_flag": null,
+   "size": 17513,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bauhinia/2023/misc/VS_Code",
+   "ctf": "Bauhinia",
+   "year": "2023",
+   "category": "misc",
+   "name": "VS_Code",
+   "dir": "Bauhinia/2023/misc/VS_Code",
+   "description": "TWY, RaccoonNinja\n濛 (Blurry)\n無暇除下每一滴瑕玼嗎\n既沒看出來　何必驚怕\n眼前若變濛　便有好夢\n平凡人亦可輕易被神化\nMaking a challenge has never been easier!\nRemark: all characters are ASCII\n",
+   "files": [
+    "README.md",
+    "vs-code_141423313b894a2b059a23588ee4833a.png"
+   ],
+   "known_flag": null,
+   "size": 7813,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bearcat/2024/stego/Best_Painting",
+   "ctf": "Bearcat",
+   "year": "2024",
+   "category": "stego",
+   "name": "Best_Painting",
+   "dir": "Bearcat/2024/stego/Best_Painting",
+   "description": "Whether it is \"The Void,\" “Zones of Immaterial Pictorial Sensibility,” or \"Take The Money And Run.\" There are a lot of art pieces with much ado about nothing. I figured I could give it a shot, there is surely no better space to find something than on a blank image.\n",
+   "files": [
+    "Blank.png",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 801046,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bearcat/2025/forensic/Around_the_World",
+   "ctf": "Bearcat",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Around_the_World",
+   "dir": "Bearcat/2025/forensic/Around_the_World",
+   "description": "Matt\n\nDaft Punk almost made this file their cover art for their hit \"Around the World\" but the image wasn't working properly. Fix it and get the flag as the reward.\n",
+   "files": [
+    "README.md",
+    "image.jpg"
+   ],
+   "known_flag": null,
+   "size": 382229,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bearcat/2025/misc/Ohio_Against_The_World",
+   "ctf": "Bearcat",
+   "year": "2025",
+   "category": "misc",
+   "name": "Ohio_Against_The_World",
+   "dir": "Bearcat/2025/misc/Ohio_Against_The_World",
+   "description": "Ben\n\nOur investigators have intercepted a GIFT from a member of a new dangerous organization. The only clue we know is that there is a text file called 'TheTruth' inside the file. Good luck! 🫡\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 196,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bearcat/2025/misc/What_you_see",
+   "ctf": "Bearcat",
+   "year": "2025",
+   "category": "misc",
+   "name": "What_you_see",
+   "dir": "Bearcat/2025/misc/What_you_see",
+   "description": "Nyla\n\nInspect, Extract, Reveal\n",
+   "files": [
+    "CtfProblem.jpg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 260703,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Bearcat/2026/misc/PNG_Polly_Needs_Grog",
+   "ctf": "Bearcat",
+   "year": "2026",
+   "category": "misc",
+   "name": "PNG_Polly_Needs_Grog",
+   "dir": "Bearcat/2026/misc/PNG_Polly_Needs_Grog",
+   "description": "Braden\n\nThe ship bird be acting strange as of late, can ye reckon why she might be so?\n",
+   "files": [
+    "README.md",
+    "image.png"
+   ],
+   "known_flag": null,
+   "size": 7863,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlockHarbor/2024/misc/Siggy",
+   "ctf": "BlockHarbor",
+   "year": "2024",
+   "category": "misc",
+   "name": "Siggy",
+   "dir": "BlockHarbor/2024/misc/Siggy",
+   "description": "I got a picture of weird Cybertruck from the Internet but it seem to be a broken picture? Can you recover it and get the flag?\n\nFlag format is bh{FLAG} —— flag has 2 parts\n",
+   "files": [
+    "README.md",
+    "cybertruck.png"
+   ],
+   "known_flag": "bh{FLAG}",
+   "size": 414116,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlockHarbor/2024/steg/Stego_1",
+   "ctf": "BlockHarbor",
+   "year": "2024",
+   "category": "steg",
+   "name": "Stego_1",
+   "dir": "BlockHarbor/2024/steg/Stego_1",
+   "description": "Find the hidden text\n",
+   "files": [
+    "README.md",
+    "bhlogo.png"
+   ],
+   "known_flag": null,
+   "size": 68148,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueArena/2025/misc/GOOGLEE_BABA",
+   "ctf": "BlueArena",
+   "year": "2025",
+   "category": "misc",
+   "name": "GOOGLEE_BABA",
+   "dir": "BlueArena/2025/misc/GOOGLEE_BABA",
+   "description": "sturtle\n\nFind me from the image\n",
+   "files": [
+    "README.md",
+    "flagg_wgKNfvol49.png"
+   ],
+   "known_flag": null,
+   "size": 107230,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueArena/2025/forensic/Image_Forensica_Kid",
+   "ctf": "BlueArena",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Image_Forensica_Kid",
+   "dir": "BlueArena/2025/forensic/Image_Forensica_Kid",
+   "description": "sturtle\n\nFind the Flag from the image\n",
+   "files": [
+    "README.md",
+    "chal2_SemJ5V4IZK.png"
+   ],
+   "known_flag": null,
+   "size": 254366,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueArena/2025/forensic/Mili_4",
+   "ctf": "BlueArena",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Mili_4",
+   "dir": "BlueArena/2025/forensic/Mili_4",
+   "description": "sturtle\n\nThis is a disaster solve it\n",
+   "files": [
+    "README.md",
+    "taser.png"
+   ],
+   "known_flag": null,
+   "size": 5051,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueArena/2025/steg/Steg_Again",
+   "ctf": "BlueArena",
+   "year": "2025",
+   "category": "steg",
+   "name": "Steg_Again",
+   "dir": "BlueArena/2025/steg/Steg_Again",
+   "description": "sturtle\n\nFind Me Again\n",
+   "files": [
+    "README.md",
+    "steg_flag_J7X61GjiJf.png"
+   ],
+   "known_flag": null,
+   "size": 1222559,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueArena/2025/steg/Steg_Boom",
+   "ctf": "BlueArena",
+   "year": "2025",
+   "category": "steg",
+   "name": "Steg_Boom",
+   "dir": "BlueArena/2025/steg/Steg_Boom",
+   "description": "sturtle\n\nHere a message is available take the action to the encryption text use 'STEG' as vigenere key and use base hex in orientation find the flag from the given image\n",
+   "files": [
+    "README.md",
+    "STEG.png"
+   ],
+   "known_flag": null,
+   "size": 541461,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueHens/2023/misc/Big_JPG",
+   "ctf": "BlueHens",
+   "year": "2023",
+   "category": "misc",
+   "name": "Big_JPG",
+   "dir": "BlueHens/2023/misc/Big_JPG",
+   "description": "There's more data to this image than what meets the eye.\n",
+   "files": [
+    "README.md",
+    "big-image.jpg"
+   ],
+   "known_flag": null,
+   "size": 1926363,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueHens/2023/misc/Least_Significant_Color",
+   "ctf": "BlueHens",
+   "year": "2023",
+   "category": "misc",
+   "name": "Least_Significant_Color",
+   "dir": "BlueHens/2023/misc/Least_Significant_Color",
+   "description": "I can't decide which color is the least significant... red xor green?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 70,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueHens/2024/misc/An_ode_to_Alejandro_and_Kristin",
+   "ctf": "BlueHens",
+   "year": "2024",
+   "category": "misc",
+   "name": "An_ode_to_Alejandro_and_Kristin",
+   "dir": "BlueHens/2024/misc/An_ode_to_Alejandro_and_Kristin",
+   "description": "Do you like puzzles?\n\n-The Cyber Frat (We went nuts on speed jigsaws this summer)\n",
+   "files": [
+    "README.md",
+    "puzzle.png"
+   ],
+   "known_flag": null,
+   "size": 1933278,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueHens/2024/forensic/Inner_Demons",
+   "ctf": "BlueHens",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Inner_Demons",
+   "dir": "BlueHens/2024/forensic/Inner_Demons",
+   "description": "guess school\n\nI can't seem to sleep at night... Maybe I need to dig further within.\n\n-pleasework.sh\n",
+   "files": [
+    "README.md",
+    "inner_demons.jpg"
+   ],
+   "known_flag": null,
+   "size": 1001183,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BlueHens/2024/forensic/Whispers_of_the_Feathered_Messenger",
+   "ctf": "BlueHens",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Whispers_of_the_Feathered_Messenger",
+   "dir": "BlueHens/2024/forensic/Whispers_of_the_Feathered_Messenger",
+   "description": "In a world where secrets flutter through the air, the bluehen carries a hidden message. A message that has been salted.... however its still a message... maybe the bluehen ignores the salt. This image holds more than meets the eye.\n\nshasum: e717eefe9b41212b017152756b0e640f9a4f3763 bird.jpeg\n\n    @PotateL\n",
+   "files": [
+    "README.md",
+    "bird.jpeg"
+   ],
+   "known_flag": null,
+   "size": 322886,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BoroCTF/2026/misc/AI_Slop",
+   "ctf": "BoroCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "AI_Slop",
+   "dir": "BoroCTF/2026/misc/AI_Slop",
+   "description": "ForeverFlames\n\nWhat is this AI slop??? Which AI made this!!!\n\nformat: boroCTF{ai_in_lowercase}\n\nWARNING ONLY 5 ATTEMPTS.\n",
+   "files": [
+    "README.md",
+    "slop.jpg"
+   ],
+   "known_flag": "boroCTF{ai_in_lowercase}",
+   "size": 196559,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BoroCTF/2026/forensic/Billie_Eilish",
+   "ctf": "BoroCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Billie_Eilish",
+   "dir": "BoroCTF/2026/forensic/Billie_Eilish",
+   "description": "ForeverFlames\n\nAlthough she is so beautiful, its whats on the inside that matters.\n",
+   "files": [
+    "README.md",
+    "billie.jpg"
+   ],
+   "known_flag": null,
+   "size": 250041,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BoroCTF/2026/forensic/Eschew",
+   "ctf": "BoroCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Eschew",
+   "dir": "BoroCTF/2026/forensic/Eschew",
+   "description": "Franklin\n\nMy image is flipped and flopped :(.\n",
+   "files": [
+    "README.md",
+    "eschew.png"
+   ],
+   "known_flag": null,
+   "size": 20938,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BoroCTF/2026/forensic/Retinal_Burn",
+   "ctf": "BoroCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Retinal_Burn",
+   "dir": "BoroCTF/2026/forensic/Retinal_Burn",
+   "description": "Franklin\n\nMy friend Jonas Wagner sent me a challenge but I can't be bothered to do it. He was always one to be working on his own sorts of projects and stuff. You do it.\n",
+   "files": [
+    "README.md",
+    "burn.png"
+   ],
+   "known_flag": null,
+   "size": 132517,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BoroCTF/2026/forensic/kitty_kitty_meow_meow",
+   "ctf": "BoroCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "kitty_kitty_meow_meow",
+   "dir": "BoroCTF/2026/forensic/kitty_kitty_meow_meow",
+   "description": "Solarity\n\naww... so cute!\n",
+   "files": [
+    "README.md",
+    "meow.jpg"
+   ],
+   "known_flag": null,
+   "size": 172851,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BraekerCTF/2024/misc/Eye_doctor",
+   "ctf": "BraekerCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Eye_doctor",
+   "dir": "BraekerCTF/2024/misc/Eye_doctor",
+   "description": "A creaky old bot is zooming in and out of an eye chart. \"Can you read the bottom line?\" the doctor asks. \"No way, \" the bot replies. \"At a certain distance my view becomes convoluted. Here, I'll make a screenshot.\"\n\nYou and the doctor look at the screenshot. Can you tell what's wrong with the bot's visual processor?\n",
+   "files": [
+    "README.md",
+    "approach.png"
+   ],
+   "known_flag": null,
+   "size": 17213,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BreachCTF/2025/misc/Mr_Bean",
+   "ctf": "BreachCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Mr_Bean",
+   "dir": "BreachCTF/2025/misc/Mr_Bean",
+   "description": "The artists of this masterpiece includes 2 CTF players who participated in a CTF competition 2 years back. Can you find the name of their team?\n\nFlag Format: Breach{teamnamewithoutspaces}\n",
+   "files": [
+    "README.md",
+    "masterpiece.jpeg"
+   ],
+   "known_flag": "Breach{teamnamewithoutspaces}",
+   "size": 2496658,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BreachCTF/2025/misc/On_the_Clock",
+   "ctf": "BreachCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "On_the_Clock",
+   "dir": "BreachCTF/2025/misc/On_the_Clock",
+   "description": "A traveler named Alex paused to snap this photo during sunrise while en route to the airport. Known for always being on time, he was heading to catch a flight scheduled to arrive on 3rd April. Oddly, he always speaks fondly of October. Can you trace his journey from this one clue?\n\nFlag Format: Breach{originAirportCodeDestinationAirportCodeOperatorFlightNumber} (All uppercase airport codes, no spaces. Example: Breach{LAXJFKAA100})\n\n    author: Ratan\n",
+   "files": [
+    "On_The_Clock.jpeg",
+    "README.md"
+   ],
+   "known_flag": "Breach{originAirportCodeDestinationAirportCodeOperatorFlightNumber}",
+   "size": 116484,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BreakTheSyntax/2026/misc/Monkeintel",
+   "ctf": "BreakTheSyntax",
+   "year": "2026",
+   "category": "misc",
+   "name": "Monkeintel",
+   "dir": "BreakTheSyntax/2026/misc/Monkeintel",
+   "description": "By milosz6432 obtain important monke flag intel now!!!\n",
+   "files": [
+    "README.md",
+    "monke_thinkin.png"
+   ],
+   "known_flag": null,
+   "size": 1276598,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BreakTheSyntax/2026/misc/pinecone",
+   "ctf": "BreakTheSyntax",
+   "year": "2026",
+   "category": "misc",
+   "name": "pinecone",
+   "dir": "BreakTheSyntax/2026/misc/pinecone",
+   "description": "I've got this message from a friend that is a little too obssessed about pinecones. People are making fun of him, saying... that he eats them?\n\nwrap the flag in BtSCTF{}, lowercase, no spaces\n",
+   "files": [
+    "README.md",
+    "challenge.png"
+   ],
+   "known_flag": null,
+   "size": 759023,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BroncoCTF/2024/misc/Countries_Unite",
+   "ctf": "BroncoCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Countries_Unite",
+   "dir": "BroncoCTF/2024/misc/Countries_Unite",
+   "description": "\"yoshie\" sent me a peculiar message. What could he possibly be trying to say?\n",
+   "files": [
+    "README.md",
+    "countries.png"
+   ],
+   "known_flag": null,
+   "size": 26129,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BroncoCTF/2024/misc/Shrekanana_Banana",
+   "ctf": "BroncoCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Shrekanana_Banana",
+   "dir": "BroncoCTF/2024/misc/Shrekanana_Banana",
+   "description": "I was given this image of Shrek in a Banana, but I can't help but feel like I am missing something...\n",
+   "files": [
+    "README.md",
+    "ShrekananaBanana.png"
+   ],
+   "known_flag": null,
+   "size": 151557,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BroncoCTF/2024/misc/Stego_Snore_Us",
+   "ctf": "BroncoCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Stego_Snore_Us",
+   "dir": "BroncoCTF/2024/misc/Stego_Snore_Us",
+   "description": "I'm not the only one tired after pulling an all-nighter for Hack for Humanity...\n",
+   "files": [
+    "README.md",
+    "stego-snore-us.png"
+   ],
+   "known_flag": null,
+   "size": 34582,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BroncoCTF/2024/forensic/Wario_Party",
+   "ctf": "BroncoCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Wario_Party",
+   "dir": "BroncoCTF/2024/forensic/Wario_Party",
+   "description": "Who is the true hero of the Mario Party games you might ask? Look inward and you might find it at the intersection of Mario's color and the number of brothers.\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 160,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BuckeyeCTF/2025/forensic/beezchurger",
+   "ctf": "BuckeyeCTF",
+   "year": "2025",
+   "category": "forensic",
+   "name": "beezchurger",
+   "dir": "BuckeyeCTF/2025/forensic/beezchurger",
+   "description": "Authored by ⁨gammascreed⁩\n\nFull mind of mind, Empty belly of belly You have recieved a gift. beezchurger\n",
+   "files": [
+    "README.md",
+    "beezchurger.gif"
+   ],
+   "known_flag": null,
+   "size": 715745,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BushBash/2026/misc/Bliss_I",
+   "ctf": "BushBash",
+   "year": "2026",
+   "category": "misc",
+   "name": "Bliss_I",
+   "dir": "BushBash/2026/misc/Bliss_I",
+   "description": "easy\nI must say, that is one very strange cloud... Author: Cameron\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 67,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BushBash/2026/misc/chip",
+   "ctf": "BushBash",
+   "year": "2026",
+   "category": "misc",
+   "name": "chip",
+   "dir": "BushBash/2026/misc/chip",
+   "description": "medium\nWe've measured some electrical signals from one of cybervillain Zoowee Blubberworth's designs. The chip's markings were sanded off but we can tell that it's still pretty new and possibly has valuable data on it. Can you figure out what chip it is?\n\nFlag format is bushbash{<manufacturer-name>, <chip-name>}\n\nAll text should be lowercase. Do not include chip packaging information, for example if the manufacturer is bingus and the name of the chip is ABC12W3R4-TR, only include the chip name (ABC12W3R4) and the flag would be bushbash{bingus, abc12w3r4}. Any spaces should be substituted with underscore _.\n\nAuthor: Eisverygoodletter\n",
+   "files": [
+    "README.md",
+    "unknown-chip.png"
+   ],
+   "known_flag": "bushbash{<manufacturer-name>, <chip-name>}",
+   "size": 78074,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:BushBash/2026/misc/say_the_word_on_beta",
+   "ctf": "BushBash",
+   "year": "2026",
+   "category": "misc",
+   "name": "say_the_word_on_beta",
+   "dir": "BushBash/2026/misc/say_the_word_on_beta",
+   "description": "medium\ncan't believe this trend was already 6 or [redacted] years ago...\n",
+   "files": [
+    "README.md",
+    "img.png"
+   ],
+   "known_flag": null,
+   "size": 161852,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CCCamp/2023/misc/Redacted",
+   "ctf": "CCCamp",
+   "year": "2023",
+   "category": "misc",
+   "name": "Redacted",
+   "dir": "CCCamp/2023/misc/Redacted",
+   "description": "Oops, I almost leaked my s3cret data. But all good.\nNote: This challenge has a different flag format, cause changing the flag is hard...\n",
+   "files": [
+    "README.md",
+    "redacted.jpg"
+   ],
+   "known_flag": null,
+   "size": 234598,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:COMPFEST/2023/forensic/not_simply_corrupted",
+   "ctf": "COMPFEST",
+   "year": "2023",
+   "category": "forensic",
+   "name": "not_simply_corrupted",
+   "dir": "COMPFEST/2023/forensic/not_simply_corrupted",
+   "description": "My friend loves to send me memes that has cats in it! One day, he sent me another cat meme from his 4-bit computer, this time with “a secret”, he said. Unfortunately, he didn’t know sending the meme from his 4-bit computer sorta altered the image. Can you help me repair the image and find the secret?\n",
+   "files": [
+    "README.md",
+    "cat.png"
+   ],
+   "known_flag": null,
+   "size": 766328,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CPCTF/2025/misc/correctionless",
+   "ctf": "CPCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "correctionless",
+   "dir": "CPCTF/2025/misc/correctionless",
+   "description": "QR codes are unnecessarily large due to the error correction area. If you erase the left half of the QR code, it will become slimmer and printing costs will be cheaper!\n",
+   "files": [
+    "README.md",
+    "qr.png"
+   ],
+   "known_flag": null,
+   "size": 13180,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CPCTF/2025/forensic/dark",
+   "ctf": "CPCTF",
+   "year": "2025",
+   "category": "forensic",
+   "name": "dark",
+   "dir": "CPCTF/2025/forensic/dark",
+   "description": "I took a picture of the flag note so I wouldn't forget, but I set the camera wrong! What should I do?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 102,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CPCTF/2026/forensic/Flag_in_Flags",
+   "ctf": "CPCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Flag_in_Flags",
+   "dir": "CPCTF/2026/forensic/Flag_in_Flags",
+   "description": "Ida-ji\n\nIf you want to hide a tree, hide it in a forest. So, if you want to hide a flag...?\n",
+   "files": [
+    "Flaggggg_2348u932f4728nv.png",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 287100,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CPCTF/2026/misc/QRRRRRRRRRR",
+   "ctf": "CPCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "QRRRRRRRRRR",
+   "dir": "CPCTF/2026/misc/QRRRRRRRRRR",
+   "description": "gateee\n\nI've implemented a QR code maker! I tried turning a flag into a QR code!\n",
+   "files": [
+    "README.md",
+    "qr-2d27682362537184a1db08f100d60c5735ef7a84cfa837a27226c2604ae92b56.png"
+   ],
+   "known_flag": null,
+   "size": 796,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CRHC/2025/misc/real_human",
+   "ctf": "CRHC",
+   "year": "2025",
+   "category": "misc",
+   "name": "real_human",
+   "dir": "CRHC/2025/misc/real_human",
+   "description": "a bit suspicious\n",
+   "files": [
+    "README.md",
+    "chal.jpg"
+   ],
+   "known_flag": null,
+   "size": 119857,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CRHC/2025/misc/sharky",
+   "ctf": "CRHC",
+   "year": "2025",
+   "category": "misc",
+   "name": "sharky",
+   "dir": "CRHC/2025/misc/sharky",
+   "description": "Don't u love gura?\n",
+   "files": [
+    "README.md",
+    "gura.jpg"
+   ],
+   "known_flag": null,
+   "size": 80261,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CSS/2026/misc/A_Star_Trail_1",
+   "ctf": "CSS",
+   "year": "2026",
+   "category": "misc",
+   "name": "A_Star_Trail_1",
+   "dir": "CSS/2026/misc/A_Star_Trail_1",
+   "description": "Beginner\n(You may have seen this last year)\n\nPolaris Logistics has an urgent delivery that needs to be transported across the star system. As the pilot of this V.I.P. (Very Important Package), you need to begin planning your trip from Earth to Lancer-RXKRD immediately. Remember to follow company protocol; you have to follow the designated paths between planet/oids to comply with interplanetary law. If you can’t deliver the V.I.P. in under 25 days, you might as well forget about your end of year bonus.\n\nPolaris Logistics.\n\nSubmit your flag using the by combining the first character of each planet/oid in your path together and then adding the number of days your path takes (with 1 decimal place) onto the end, separated by a dash. E.g. if your path from A-PLANET TO B-PLANET was PAPA, OSCAR, SIERRA, TANGO, 2025PLANET and took exactly 5 days, the flag would be CSSCTF{POST2-5.0}\n",
+   "files": [
+    "A_Star_Trail.png",
+    "README.md"
+   ],
+   "known_flag": "CSSCTF{POST2-5.0}",
+   "size": 598581,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CSS/2026/steg/Colour_Shift",
+   "ctf": "CSS",
+   "year": "2026",
+   "category": "steg",
+   "name": "Colour_Shift",
+   "dir": "CSS/2026/steg/Colour_Shift",
+   "description": "Beginner\nIn 1666 Issac Newton split light into their compositve wavelengths. Can you?\n\nFlag format: CSSCTF{...}\n",
+   "files": [
+    "README.md",
+    "colorshiftctf.bmp"
+   ],
+   "known_flag": "CSSCTF{...}",
+   "size": 1083850,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CTF@CIT/2024/steg/I_LOVE_PRIME",
+   "ctf": "CTF@CIT",
+   "year": "2024",
+   "category": "steg",
+   "name": "I_LOVE_PRIME",
+   "dir": "CTF@CIT/2024/steg/I_LOVE_PRIME",
+   "description": "I LOVE PRIME SO MUCH META MOON IS SO GOOD ITS SO FULFILLING MMMMM TASTY!\n",
+   "files": [
+    "README.md",
+    "meta-moon.jpg"
+   ],
+   "known_flag": null,
+   "size": 24077,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CTF@CIT/2024/steg/Intern",
+   "ctf": "CTF@CIT",
+   "year": "2024",
+   "category": "steg",
+   "name": "Intern",
+   "dir": "CTF@CIT/2024/steg/Intern",
+   "description": "So we just hired an intern for our CTF. He wanted to make some challenges, but we told him to just make us a flyer to keep him occupied. Surely he didn't put a flag in here or else he's getting fired. Let us know..\n",
+   "files": [
+    "README.md",
+    "intern.png"
+   ],
+   "known_flag": null,
+   "size": 46913,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CTF@CIT/2024/forensic/Secret_Square",
+   "ctf": "CTF@CIT",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Secret_Square",
+   "dir": "CTF@CIT/2024/forensic/Secret_Square",
+   "description": "Find the flag.\n",
+   "files": [
+    "README.md",
+    "secret_square.png"
+   ],
+   "known_flag": null,
+   "size": 1117,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CTF@CIT/2024/steg/The_Art_of_the_Beast",
+   "ctf": "CTF@CIT",
+   "year": "2024",
+   "category": "steg",
+   "name": "The_Art_of_the_Beast",
+   "dir": "CTF@CIT/2024/steg/The_Art_of_the_Beast",
+   "description": "Embrace the dark, let the beast within rise, A journey of strength, beneath the moon's wise eyes. In silence and shadow, your true self you'll find, a beast of steg, untamed and unconfined. - Sensei\n",
+   "files": [
+    "README.md",
+    "the-art-of-the-beast.png"
+   ],
+   "known_flag": null,
+   "size": 540579,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CYBERGON/2023/steg/Catch_Me_If_You_Can",
+   "ctf": "CYBERGON",
+   "year": "2023",
+   "category": "steg",
+   "name": "Catch_Me_If_You_Can",
+   "dir": "CYBERGON/2023/steg/Catch_Me_If_You_Can",
+   "description": "Do not judge until you know all story.\n",
+   "files": [
+    "README.md",
+    "Stegano1.gif"
+   ],
+   "known_flag": null,
+   "size": 55505,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CYBERGON/2023/steg/Data_Exfiltration",
+   "ctf": "CYBERGON",
+   "year": "2023",
+   "category": "steg",
+   "name": "Data_Exfiltration",
+   "dir": "CYBERGON/2023/steg/Data_Exfiltration",
+   "description": "The design creator who is a member of CyberGon Team tried to embed the secret data in an Image file. And then he sent this file to suspicious customer for one project. Can you find the secret data for us?\n",
+   "files": [
+    "README.md",
+    "Steg1.PNG"
+   ],
+   "known_flag": null,
+   "size": 1240609,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CYBERGON/2023/forensic/Frozen_Xip",
+   "ctf": "CYBERGON",
+   "year": "2023",
+   "category": "forensic",
+   "name": "Frozen_Xip",
+   "dir": "CYBERGON/2023/forensic/Frozen_Xip",
+   "description": "This file is something wrong. Can you open it before the winter season?\n",
+   "files": [
+    "README.md",
+    "xipper.PNG"
+   ],
+   "known_flag": null,
+   "size": 440,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CYBERGON/2023/forensic/Malfunctioning_File",
+   "ctf": "CYBERGON",
+   "year": "2023",
+   "category": "forensic",
+   "name": "Malfunctioning_File",
+   "dir": "CYBERGON/2023/forensic/Malfunctioning_File",
+   "description": "Can you fix the file and extract the secret data?\n",
+   "files": [
+    "Cybergon.jpg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 159472,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CodeVinci/2026/misc/xyz",
+   "ctf": "CodeVinci",
+   "year": "2026",
+   "category": "misc",
+   "name": "xyz",
+   "dir": "CodeVinci/2026/misc/xyz",
+   "description": "what was the activity David was doing an hour before the event?\n\nauthor: franciuto\n\nFlag: Codevinci{name_of_activity}\n",
+   "files": [
+    "README.md",
+    "source.jpg"
+   ],
+   "known_flag": "Codevinci{name_of_activity}",
+   "size": 6474,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Codefest/2025/forensic/Cats",
+   "ctf": "Codefest",
+   "year": "2025",
+   "category": "forensic",
+   "name": "Cats",
+   "dir": "Codefest/2025/forensic/Cats",
+   "description": "0xkn1gh7\n\nBecause Events Head said \"NO CATS\"\n",
+   "files": [
+    "README.md",
+    "chall.jpg"
+   ],
+   "known_flag": null,
+   "size": 433602,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Codefest/2025/forensic/DogeCoin",
+   "ctf": "Codefest",
+   "year": "2025",
+   "category": "forensic",
+   "name": "DogeCoin",
+   "dir": "Codefest/2025/forensic/DogeCoin",
+   "description": "0xkn1gh7\n\nIf DogeCoin had a counterfeit, this is probably it. Looks same but maybe isn't...\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": null,
+   "size": 415463,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CrewCTF/2023/misc/findme",
+   "ctf": "CrewCTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "findme",
+   "dir": "CrewCTF/2023/misc/findme",
+   "description": "osint\nfind the Coordinate\nexample : crew{19.3212, 122.1235}\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": "crew{19.3212, 122.1235}",
+   "size": 2249070,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CrewCTF/2023/misc/in_car",
+   "ctf": "CrewCTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "in_car",
+   "dir": "CrewCTF/2023/misc/in_car",
+   "description": "osint\nfind the street name\nformat flag : crew{W Van Buren ST}\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": "crew{W Van Buren ST}",
+   "size": 1849893,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CryptoNite/2026/forensic/An_Image",
+   "ctf": "CryptoNite",
+   "year": "2026",
+   "category": "forensic",
+   "name": "An_Image",
+   "dir": "CryptoNite/2026/forensic/An_Image",
+   "description": "I tried to transfer this from my old drive, but the file was corrupted during the move. The image viewer says it's an invalid format, but I know the data is still in there...\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": null,
+   "size": 1347,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CryptoNite/2026/steg/New_Challenges",
+   "ctf": "CryptoNite",
+   "year": "2026",
+   "category": "steg",
+   "name": "New_Challenges",
+   "dir": "CryptoNite/2026/steg/New_Challenges",
+   "description": "Tbvh one of the many fun things about steganography is how deeply one can embed their messages. Here is a flavour of some of the newer tricks to hide stuff in images. :P\n",
+   "files": [
+    "README.md",
+    "output.png"
+   ],
+   "known_flag": null,
+   "size": 254767,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CubeCTF/2025/misc/Is_this_stego",
+   "ctf": "CubeCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Is_this_stego",
+   "dir": "CubeCTF/2025/misc/Is_this_stego",
+   "description": "Someone was asking us for a stego challenge, hopefully this is what they were looking for.\n\nFlag format: cube{LAT,LON} with only two digits after the decimal point.\n\ne.g. cube{12.34,-56.78}\n\nAuthor: @outwrest\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "cube{LAT,LON}",
+   "size": 209,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CyberGame/2026/forensic/Forensics_Sanity_Check_Elephant1",
+   "ctf": "CyberGame",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Forensics_Sanity_Check_Elephant1",
+   "dir": "CyberGame/2026/forensic/Forensics_Sanity_Check_Elephant1",
+   "description": "Here is a picture of an elephant. He is huge, so the flag is probably somewhere behind him.\n",
+   "files": [
+    "README.md",
+    "elephant.png"
+   ],
+   "known_flag": null,
+   "size": 210577,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CyberHeroines/2023/forensic/Margaret_Hamilton",
+   "ctf": "CyberHeroines",
+   "year": "2023",
+   "category": "forensic",
+   "name": "Margaret_Hamilton",
+   "dir": "CyberHeroines/2023/forensic/Margaret_Hamilton",
+   "description": "[Margaret Elaine Hamilton](https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer) (née Heafield; born August 17, 1936) is an American computer scientist, systems engineer, and business owner. She was director of the Software Engineering Division of the MIT Instrumentation Laboratory, which developed on-board flight software for NASA's Apollo program. She later founded two software companies—Higher Order Software in 1976 and Hamilton Technologies in 1986, both in Cambridge, Massachusetts. - [Wikipedia Entry](https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)\n\nChal: Return the flag to NASAs first software engineer.\n",
+   "files": [
+    "Apollo-Mystery.jpg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 1022194,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:CyberSpace/2024/misc/REDACTED",
+   "ctf": "CyberSpace",
+   "year": "2024",
+   "category": "misc",
+   "name": "REDACTED",
+   "dir": "CyberSpace/2024/misc/REDACTED",
+   "description": "osint\n\nPlease find the flag in the \"About Me\" of the Discord user who took the screenshot!\n\nAuthor: quasar098\n",
+   "files": [
+    "README.md",
+    "REDACTED.png"
+   ],
+   "known_flag": null,
+   "size": 99159,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Cygenix/2024/steg/Can_you_see_me",
+   "ctf": "Cygenix",
+   "year": "2024",
+   "category": "steg",
+   "name": "Can_you_see_me..",
+   "dir": "Cygenix/2024/steg/Can_you_see_me",
+   "description": "\"What the eyes cannot see, the mind must unveil.\"\n",
+   "files": [
+    "README.md",
+    "flag.jpeg"
+   ],
+   "known_flag": null,
+   "size": 21883,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Cygenix/2024/forensic/SUS_Image",
+   "ctf": "Cygenix",
+   "year": "2024",
+   "category": "forensic",
+   "name": "SUS_Image",
+   "dir": "Cygenix/2024/forensic/SUS_Image",
+   "description": "This image seems kinda sus to me. Do you think you can find out what lies concealed within and get me the flag? Lets find out what you can uncover!\n",
+   "files": [
+    "README.md",
+    "image.jpg"
+   ],
+   "known_flag": null,
+   "size": 9938,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Cygenix/2024/steg/Valour",
+   "ctf": "Cygenix",
+   "year": "2024",
+   "category": "steg",
+   "name": "Valour",
+   "dir": "Cygenix/2024/steg/Valour",
+   "description": "Brave men rejoice in adversity, just as brave soldiers triumph in war. Remember, bravery is not just merely the absence of fear, its the capacity to perform properly even when half scared to death.\n",
+   "files": [
+    "README.md",
+    "courage.png"
+   ],
+   "known_flag": null,
+   "size": 197732,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Cyshock/2025/misc/Chapter_6._Where_it_all_begun_CRYPTO",
+   "ctf": "Cyshock",
+   "year": "2025",
+   "category": "misc",
+   "name": "Chapter_6._Where_it_all_begun_CRYPTO",
+   "dir": "Cyshock/2025/misc/Chapter_6._Where_it_all_begun_CRYPTO",
+   "description": "theawake-chapter6.png\n\nIt worked, you unlocked the computer. It looks like they were careless, or maybe they wanted you to find it all along. The system is almost empty, except for an old corrupted file, a picture, and some weird data.\n",
+   "files": [
+    "README.md",
+    "chall.txt",
+    "corrupted.py"
+   ],
+   "known_flag": null,
+   "size": 5872,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DEADFACE/2023/steg/Fetching_Secrets",
+   "ctf": "DEADFACE",
+   "year": "2023",
+   "category": "steg",
+   "name": "Fetching_Secrets",
+   "dir": "DEADFACE/2023/steg/Fetching_Secrets",
+   "description": "syyntax steg\nCreated by: syyntax\n\nThis image was found on Ghost Town. Looks like one of DEADFACE’s newest members is new to steganography. See if you can find any hidden information in this image. Knowing information about the image may help to reveal the flag.\n\nSubmit the flag as: flag{flag_text}.\n",
+   "files": [
+    "README.md",
+    "cyberdog.jpg"
+   ],
+   "known_flag": "flag{flag_text}",
+   "size": 482611,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DEADFACE/2023/steg/Youve_Been_Ransomwared",
+   "ctf": "DEADFACE",
+   "year": "2023",
+   "category": "steg",
+   "name": "Youve_Been_Ransomwared",
+   "dir": "DEADFACE/2023/steg/Youve_Been_Ransomwared",
+   "description": "RP-01? steg crypto\n\nCreated by: RP-01?\n\nDEADFACE is taunting GlitterCo with their latest ransomware attack. According to our intel, the attackers like to leave a calling card in their attacks. If we can figure out which DEADFACE actor executed this attack, we might be able to figure out a way around paying. Can you find anything in this screenshot that might point to which attacker ran this ransomware attack?\n\nSubmit the flag as flag{attacker_name}.\n",
+   "files": [
+    "README.md",
+    "ransomwared.png"
+   ],
+   "known_flag": "flag{attacker_name}",
+   "size": 146070,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DEADFACE/2024/steg/Descended_from_Wolves",
+   "ctf": "DEADFACE",
+   "year": "2024",
+   "category": "steg",
+   "name": "Descended_from_Wolves",
+   "dir": "DEADFACE/2024/steg/Descended_from_Wolves",
+   "description": "syyntax steganography\nCreated by: syyntax\n\nThere’s an image circulating on GhostTown of some weird dog. Based on the conversation in the forum, it sounds like the image holds some data that lamia415 extracted from De Monne Financial. Use the context in the conversation to determine what was extracted.\n\nSubmit the flag as flag{flag-text}.\n\nSHA1: d004a397bd04d17cc0462cb9578877607be9e34a\n",
+   "files": [
+    "README.md",
+    "princess.png"
+   ],
+   "known_flag": "flag{flag-text}",
+   "size": 811109,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DEADFACE/2024/steg/Electric_Soldiers",
+   "ctf": "DEADFACE",
+   "year": "2024",
+   "category": "steg",
+   "name": "Electric_Soldiers",
+   "dir": "DEADFACE/2024/steg/Electric_Soldiers",
+   "description": "syyntax steganography\nCreated by: syyntax\n\nWe stumbled across this image from d34th that might indicate how DEADFACE plans to sneak stolen information through various networks without detection. According to Ghost Town, d34th has been refining his process for embedding hidden information in various files.\n\nSee if you can uncover any hidden information in this image. Submit the flag as flag{flag-text}.\n\nSHA1: 908b0d7d387832aa065feabf4aef2ae7a1158f30\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "flag{flag-text}",
+   "size": 453,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DEADFACE/2024/steg/Offsite_Targets",
+   "ctf": "DEADFACE",
+   "year": "2024",
+   "category": "steg",
+   "name": "Offsite_Targets",
+   "dir": "DEADFACE/2024/steg/Offsite_Targets",
+   "description": "syyntax steganography\nCreated by: syyntax\n\nlamia415 sent an image to daem0n with secret information about who or what they are building a campaign against. Turbo Tactical wants to lean forward on this and prepare any individuals or companies that might be targeted by DEADFACE. Find out what the hidden message is and submit the flag.\n\nSubmit the flag as: flag{text_here}.\n\nSHA1: e2f3ba840b59a0170010d9880ee1ff825d252f42\n",
+   "files": [
+    "README.md",
+    "img20240803.jpg"
+   ],
+   "known_flag": "flag{text_here}",
+   "size": 306202,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DIVEROSINT/2024/misc/label",
+   "ctf": "DIVEROSINT",
+   "year": "2024",
+   "category": "misc",
+   "name": "label",
+   "dir": "DIVEROSINT/2024/misc/label",
+   "description": "この荷物の宛先として考えられる施設の郵便番号を教えてほしい。\n例えば在日アメリカ大使館が答えの場合、Flagは Diver24{107-8420} となる。\n\nPlease tell me the postal code of the facility as a likely destination for this package.\nIf it is the US embassy in Japan, the flag will be Diver24{107-8420}.\n",
+   "files": [
+    "README.md",
+    "label.jpg"
+   ],
+   "known_flag": "Diver24{107-8420}",
+   "size": 49648,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DIVEROSINT/2024/misc/wumpus",
+   "ctf": "DIVEROSINT",
+   "year": "2024",
+   "category": "misc",
+   "name": "wumpus",
+   "dir": "DIVEROSINT/2024/misc/wumpus",
+   "description": "とあるDiscordサーバにFlagが投稿されたぞ！\n本問に限って、ターゲットに接触を試みても大丈夫だ。\n\nFlag has been posted on a Discord server!\nOnly for this challenge, it is okay to attempt to contact the target.\n",
+   "files": [
+    "PXL.jpg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 358890,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DaVinciCTF/2025/steg/ERR0R_a4",
+   "ctf": "DaVinciCTF",
+   "year": "2025",
+   "category": "steg",
+   "name": "ERR0R_a4",
+   "dir": "DaVinciCTF/2025/steg/ERR0R_a4",
+   "description": "With your team, you successfully stole the latest database from the Louvre, which is digitizing its artworks as NFTs! Unfortunately, when you connected the NFT database to your computer, it got infected with a virus, destroying all your data and the loot you thought you had stolen. Someone else must have gotten there before you, and unfortunately, you were only able to recover this corrupted image. An amateur like him must have left traces! Flag format: DVCTF{Michel_The_Hacker}\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "DVCTF{Michel_The_Hacker}",
+   "size": 483,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DalCTF/2026/forensic/Spoiled_Cheese_Pull",
+   "ctf": "DalCTF",
+   "year": "2026",
+   "category": "forensic",
+   "name": "Spoiled_Cheese_Pull",
+   "dir": "DalCTF/2026/forensic/Spoiled_Cheese_Pull",
+   "description": "Written by: ASmilyBun\n\nMy cheese got pulled and now I can't eat it. Can you help me find out who did it?\n",
+   "files": [
+    "README.md",
+    "chall.png"
+   ],
+   "known_flag": null,
+   "size": 1229,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DalCTF/2026/misc/someone_said_steg",
+   "ctf": "DalCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "someone_said_steg",
+   "dir": "DalCTF/2026/misc/someone_said_steg",
+   "description": "Written by: lorg\n\neveryone <3s steg right?\n",
+   "files": [
+    "README.md",
+    "challenge.png"
+   ],
+   "known_flag": null,
+   "size": 48251,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DamCTF/2024/misc/asparagus",
+   "ctf": "DamCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "asparagus",
+   "dir": "DamCTF/2024/misc/asparagus",
+   "description": "alienfoetus, WholeWheatBagels\n\nLast spring break, we took a short trip to see these special flowers! Can you find where we were?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 129,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DamCTF/2024/misc/grapes",
+   "ctf": "DamCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "grapes",
+   "dir": "DamCTF/2024/misc/grapes",
+   "description": "alienfoetus, WholeWheatBagels\n\nMy dad had a friend take a picture of his speeder car, but we forgot where this was. Can you find the name of the vineyard in the background?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 173,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DawgCTF/2024/misc/Cold_War_II",
+   "ctf": "DawgCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Cold_War_II",
+   "dir": "DawgCTF/2024/misc/Cold_War_II",
+   "description": "I came across some old, really cool weapon schematics. However, the document was so redacted upon being declassified that it doesn't say what the schematics are for. If I knew what they were for, it would up the cool-factor showing this in my home museum. Can you help me figure out what the weapon is called? Then, figure out who was the contractor chosen for continued development (the latter will be the flag). Thank you!\n",
+   "files": [
+    "README.md",
+    "weapon.png"
+   ],
+   "known_flag": null,
+   "size": 21135,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DawgCTF/2024/misc/Dmitry_six",
+   "ctf": "DawgCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Dmitry_six",
+   "dir": "DawgCTF/2024/misc/Dmitry_six",
+   "description": "My friend from Kazakhstan sent me this weird picture, he says that it's the key to a secret treasure room underground. Do you know where this picture was taken? The flag will be the official name of it, and should be 5 letters, all capital letters, and 1 number. 6 characters total.\n",
+   "files": [
+    "README.md",
+    "dmetri6.jpeg"
+   ],
+   "known_flag": null,
+   "size": 63670,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DawgCTF/2024/misc/Long_Lines",
+   "ctf": "DawgCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Long_Lines",
+   "dir": "DawgCTF/2024/misc/Long_Lines",
+   "description": "I was watching my favorite show Better Call Saul recently and noticed something peculiar, can you figure out what the phone number for this parking garage is? I wanna recreate the shot... (your flag will be the number for the garage without dashes, e.g DawgCTF{2015552124}\n",
+   "files": [
+    "README.md",
+    "liners.jpg"
+   ],
+   "known_flag": "DawgCTF{2015552124}",
+   "size": 848521,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DawgCTF/2024/misc/Stopped_For_Gas",
+   "ctf": "DawgCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Stopped_For_Gas",
+   "dir": "DawgCTF/2024/misc/Stopped_For_Gas",
+   "description": "I'm new to Maryland, so I had to stop at a convenience store for directions, but nobody inside was helpful. I really should get back to UMBC campus soon, help! What town am I in?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 179,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DeconstruCT.F/2023/forensic/Magicplay",
+   "ctf": "DeconstruCT.F",
+   "year": "2023",
+   "category": "forensic",
+   "name": "Magicplay",
+   "dir": "DeconstruCT.F/2023/forensic/Magicplay",
+   "description": "Dwayne's mischevious nephew played around in his pc and corrupted a very important file..\nHelp dwayne recover it!\n",
+   "files": [
+    "README.md",
+    "magic_play.png"
+   ],
+   "known_flag": null,
+   "size": 250251,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:DeconstruCT.F/2023/forensic/Space_Ahoy",
+   "ctf": "DeconstruCT.F",
+   "year": "2023",
+   "category": "forensic",
+   "name": "Space_Ahoy",
+   "dir": "DeconstruCT.F/2023/forensic/Space_Ahoy",
+   "description": "Brian tries to send some crucial information from the spacestation about an impending disaster through a super secure line to his friend through a picture.\nHelp his friend uncover the truth ..\nAuthor: Rakhul\nFlag Format:\ndsc{[a-zA-Z0-9_]+}\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "dsc{[a-zA-Z0-9_]+}",
+   "size": 240,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:EHAX/2025/misc/Help_the_Hacker",
+   "ctf": "EHAX",
+   "year": "2025",
+   "category": "misc",
+   "name": "Help_the_Hacker",
+   "dir": "EHAX/2025/misc/Help_the_Hacker",
+   "description": "My hacker friend was trying to make a photo that cannot be decrpyted, He wants your help to test out if you can get the data from the photo or not.\n\nauthor: Yegnis, Shield01, Warrior\n",
+   "files": [
+    "README.md",
+    "enc.c",
+    "enc.txt",
+    "sus.jpg"
+   ],
+   "known_flag": null,
+   "size": 201994,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:EnigmaXplore/2024/forensic/Bin",
+   "ctf": "EnigmaXplore",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Bin",
+   "dir": "EnigmaXplore/2024/forensic/Bin",
+   "description": "I am thinking of buying a bin to store a bunch of my trash. Do you like this one?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 82,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:FE-CTF/2023/misc/Inception",
+   "ctf": "FE-CTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "Inception",
+   "dir": "FE-CTF/2023/misc/Inception",
+   "description": "baby's 1st OMGACM local\n\nDo you know what the difference between a labyrinth and a maze is?\n\nLabyrinths don't stall the pipeline.\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 130,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:FE-CTF/2023/misc/Into_the_Ether_Smol",
+   "ctf": "FE-CTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "Into_the_Ether_Smol",
+   "dir": "FE-CTF/2023/misc/Into_the_Ether_Smol",
+   "description": "\n",
+   "files": [
+    "README.md",
+    "digital.csv.gz",
+    "photo1.jpg"
+   ],
+   "known_flag": null,
+   "size": 1426410,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:FE-CTF/2023/misc/Simple_Protocol",
+   "ctf": "FE-CTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "Simple_Protocol",
+   "dir": "FE-CTF/2023/misc/Simple_Protocol",
+   "description": "baby's 1st we get signal local\n\nProtocols are everywhere. F.x. who hangs up first? The caller or the callee?\n\nLuckily this protocol is much simpler.\n",
+   "files": [
+    "README.md",
+    "analog.csv.gz",
+    "photo1.jpg"
+   ],
+   "known_flag": null,
+   "size": 1289050,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:FooBarCTF/2025/misc/Silent_Whispers",
+   "ctf": "FooBarCTF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Silent_Whispers",
+   "dir": "FooBarCTF/2025/misc/Silent_Whispers",
+   "description": "A cryptic image was intercepted from an underground hacker forum—hearme.jpg. At first glance, it appears to be just an ordinary picture, but intelligence reports suggest otherwise.\n\nThe sender, known only as \"GhostCipher,\" is infamous for embedding secret messages in plain sight. Rumors say that critical information has been hidden within this image, accessible only to those who know where to look.\n\nCan you decode the hidden message before it vanishes into the void?\n",
+   "files": [
+    "README.md",
+    "hearme.jpg"
+   ],
+   "known_flag": null,
+   "size": 156850,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:FullWeakEngineer/2025/forensic/QR",
+   "ctf": "FullWeakEngineer",
+   "year": "2025",
+   "category": "forensic",
+   "name": "QR",
+   "dir": "FullWeakEngineer/2025/forensic/QR",
+   "description": "Forensic Beginner\nr_k01m\n\nRGB RGB RGB\n\nRGB RGB RGB\n\nRGB RGB RGB\n",
+   "files": [
+    "README.md",
+    "qrgb.png"
+   ],
+   "known_flag": null,
+   "size": 2764,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:GaslightCTF/2026/misc/mineguesser",
+   "ctf": "GaslightCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "mineguesser",
+   "dir": "GaslightCTF/2026/misc/mineguesser",
+   "description": "misc\nWe're tracking a rogue pillager cell who have hidden some weapons in this ruined portal's chest. Find the coordinates of the chest.\n1.21.11, abs(x, y, z) <= (5000, 125, 5000)\n\nAuthor\nsportshead\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 199,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:GaslightCTF/2026/misc/odyssey",
+   "ctf": "GaslightCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "odyssey",
+   "dir": "GaslightCTF/2026/misc/odyssey",
+   "description": "misc\nDo I colour grade better than Christopher Nolan?\nFlag format: gaslightCTF{LAT,LONG} (round to 3 d.p.)\n\nAuthor\nsportshead\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "gaslightCTF{LAT,LONG}",
+   "size": 126,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:GaslightCTF/2026/misc/quack",
+   "ctf": "GaslightCTF",
+   "year": "2026",
+   "category": "misc",
+   "name": "quack",
+   "dir": "GaslightCTF/2026/misc/quack",
+   "description": "misc\nFlag format: gaslightCTF{LAT,LONG} (round to 3 d.p.)\ntip: please try ±0.001 on your latitude!\n\nAuthor\nsportshead\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "gaslightCTF{LAT,LONG}",
+   "size": 119,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:GoogleCTF/2023/misc/papapapa",
+   "ctf": "GoogleCTF",
+   "year": "2023",
+   "category": "misc",
+   "name": "papapapa",
+   "dir": "GoogleCTF/2023/misc/papapapa",
+   "description": "Is this image really just white?\n",
+   "files": [
+    "README.md",
+    "white.jpg"
+   ],
+   "known_flag": null,
+   "size": 9273,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:H7CTF/2024/forensic/Captain_Cool",
+   "ctf": "H7CTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Captain_Cool",
+   "dir": "H7CTF/2024/forensic/Captain_Cool",
+   "description": "\"It is better to keep your mouth closed and let people think you are a fool than to open it and remove all doubt.\" - Mark Twain\n\nAll that is good, but Thala spoke the golden words d-e-f-i-n-i-t-e-l-y-n-o-t.\n\nAuthor: Abu\n",
+   "files": [
+    "README.md",
+    "white.png"
+   ],
+   "known_flag": null,
+   "size": 29084,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:H7CTF/2024/forensic/Evolve",
+   "ctf": "H7CTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Evolve",
+   "dir": "H7CTF/2024/forensic/Evolve",
+   "description": "“Civilization is the subordination of the individual to the welfare of the community.” - Charles Fourier\n\nAuthor: Abu\n",
+   "files": [
+    "README.md",
+    "flag.png"
+   ],
+   "known_flag": null,
+   "size": 340168,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:H7CTF/2024/misc/QRco",
+   "ctf": "H7CTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "QRco",
+   "dir": "H7CTF/2024/misc/QRco",
+   "description": "A seemingly innocuous QR code holds the key to a puzzle concealed in plain sight. Your quest begins with the scan of a code that unveils a document shrouded in mystery.\n\nAuthor: SHL\n",
+   "files": [
+    "QRco.jpg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 149434,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:HeroCTF/2024/steg/LSD_3",
+   "ctf": "HeroCTF",
+   "year": "2024",
+   "category": "steg",
+   "name": "LSD_3",
+   "dir": "HeroCTF/2024/steg/LSD_3",
+   "description": "medium prog\n\nDon't try to throw random tools at this poor image. Go back to the basics and learn the detection techniques. Good luck!\n\nFormat : Hero{}\nAuthor : Thibz\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 166,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:IMF/2025/misc/Finding_Sevastopol",
+   "ctf": "IMF",
+   "year": "2025",
+   "category": "misc",
+   "name": "Finding_Sevastopol",
+   "dir": "IMF/2025/misc/Finding_Sevastopol",
+   "description": "Find the key hidden in the sunken submarine\nMission Brief\n\nWe have just received the photo of the sunken Sevastopol find what key it has.\nIntelligence Hints\n#1You know Ethan Dunloe tried his best to send the coordinates to you. What do you comment on that?\n",
+   "files": [
+    "Finding Podkona.jpeg",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 5395,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ImaginaryCTF/2023/forensic/steganographic",
+   "ctf": "ImaginaryCTF",
+   "year": "2023",
+   "category": "forensic",
+   "name": "steganographic",
+   "dir": "ImaginaryCTF/2023/forensic/steganographic",
+   "description": "by Eth007\nIf I want to send a steganographic message over the internet, I should definitely make my own algorithm. So don't go and start plugging it into random steg tools until you find the flag. You won't.\nNote: we may release a hint if this ends up to be too guessy.\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 270,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ImaginaryCTF/2024/forensic/dog_mom",
+   "ctf": "ImaginaryCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "dog_mom",
+   "dir": "ImaginaryCTF/2024/forensic/dog_mom",
+   "description": "by Eth007\n\nThis is an OSINT challenge.\n\ni'm a dog mom i 🩷 dogs\n\nFind where this picture was taken; submit your flag as ictf, both rounded to three decimal places. (example: ictf{-12.345_66.533})\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": "ictf{-12.345_66.533}",
+   "size": 198,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ImaginaryCTF/2024/forensic/playful_puppy",
+   "ctf": "ImaginaryCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "playful_puppy",
+   "dir": "ImaginaryCTF/2024/forensic/playful_puppy",
+   "description": "by cleverbear57\n\nI lost my dog in Minecraft. Can you find him? The name of the dog wrapped in ictf{} is the flag.\n\nThe dog's name is 16 hex characters, anything else is not correct.\n",
+   "files": [
+    "README.md",
+    "image.png"
+   ],
+   "known_flag": null,
+   "size": 299001,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:InterlogicaCTFs/2024/steg/Blessings_for_the_Future",
+   "ctf": "InterlogicaCTFs",
+   "year": "2024",
+   "category": "steg",
+   "name": "Blessings_for_the_Future",
+   "dir": "InterlogicaCTFs/2024/steg/Blessings_for_the_Future",
+   "description": "Armed with the bounty of resources discovered within the remote building, we embark on a journey to a bustling market — a beacon of resilience and community in the post-apocalyptic landscape. Here, amidst the chaos and clamor, we share the treasures unearthed, offering sustenance, equipment, and tools to fellow survivors in need. In this act of generosity and camaraderie, we sow the seeds of hope and forge bonds that transcend the trials of the present. As we engage in the delicate dance of sharing and bartering, we remember that these exchanges are not merely transactions of goods but blessings for the future — a testament to the enduring spirit of cooperation and solidarity. Through our actions, we lay the foundation for a brighter tomorrow, where mutual support and compassion reign supreme. We embrace the power of community and the promise of a shared future as we navigate the challenges that lie ahead.\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 924,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:InterlogicaCTFs/2024/steg/Gifts_of_the_Present",
+   "ctf": "InterlogicaCTFs",
+   "year": "2024",
+   "category": "steg",
+   "name": "Gifts_of_the_Present",
+   "dir": "InterlogicaCTFs/2024/steg/Gifts_of_the_Present",
+   "description": "Within the hidden recesses of the remote building, we uncover a cornucopia of sustenance, equipment, gear, and tools essential for survival. This stash, carefully concealed yet now revealed through our perseverance and decoding prowess, offers a beacon of hope in the bleak aftermath of disaster. As we gather these invaluable resources, we remember that they are not merely relics of the past, but gifts of the present — testaments to resilience, preparedness, and the enduring spirit of survival. We embrace the abundance bestowed upon us and carry forth the mission of aid and empowerment to those in need. In this challenge lies not only the keys to sustenance but also the embodiment of generosity and solidarity amidst adversity.\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 738,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:InterlogicaCTFs/2024/steg/Whispers_of_the_Past",
+   "ctf": "InterlogicaCTFs",
+   "year": "2024",
+   "category": "steg",
+   "name": "Whispers_of_the_Past",
+   "dir": "InterlogicaCTFs/2024/steg/Whispers_of_the_Past",
+   "description": "Having deciphered the enigmatic messages from the souls lost in the nuclear catastrophe, we are led to a remote building nestled in the desolate desert. Here lies a treasure trove of resources crucial for survival, waiting to be unearthed and shared with other unfortunate survivors. Our journey towards resilience and generosity begins here, as we harness the knowledge bestowed upon us to extend a lifeline to those in need. We must let the whispers of the past guide us as we embark on this noble quest of discovery and altruism.\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 533,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Junior.Crypt/2024/steg/Easy_flag",
+   "ctf": "Junior.Crypt",
+   "year": "2024",
+   "category": "steg",
+   "name": "Easy_flag",
+   "dir": "Junior.Crypt/2024/steg/Easy_flag",
+   "description": "Всё очень просто. Флаг на картинке\n\nEverything is very simple. Flag in the picture\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 111,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Junior.Crypt/2024/steg/Lets_sing_friends",
+   "ctf": "Junior.Crypt",
+   "year": "2024",
+   "category": "steg",
+   "name": "Lets_sing_friends...",
+   "dir": "Junior.Crypt/2024/steg/Lets_sing_friends",
+   "description": "Хороооошая песенка ...\n\nСпоем ?\n\n“Xoroooshaya pesnya ... (Good song...) - as say in Belarus.\n\nShall we sing?\n",
+   "files": [
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 133,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:Junior.Crypt/2025/forensic/All_in_white",
+   "ctf": "Junior.Crypt",
+   "year": "2025",
+   "category": "forensic",
+   "name": "All_in_white",
+   "dir": "Junior.Crypt/2025/forensic/All_in_white",
+   "description": "Forensics Steganography\n\nМаленький файл. Белый фон. Наверно, все спрятано в белом :)\n\nSmall file. White background. Probably, everything is hidden in white :)\n",
+   "files": [
+    "README.md",
+    "new_png6x6.png"
+   ],
+   "known_flag": null,
+   "size": 365,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:KnightCTF/2024/stego/Oceanic",
+   "ctf": "KnightCTF",
+   "year": "2024",
+   "category": "stego",
+   "name": "Oceanic",
+   "dir": "KnightCTF/2024/stego/Oceanic",
+   "description": "The ocean's beauty is in its clear waters, but its strength lies in its dark depths.\n",
+   "files": [
+    "README.md",
+    "clue.jpg"
+   ],
+   "known_flag": null,
+   "size": 20098,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:LA/2026/misc/grammar",
+   "ctf": "LA",
+   "year": "2026",
+   "category": "misc",
+   "name": "grammar",
+   "dir": "LA/2026/misc/grammar",
+   "description": "k\nInspired by CS 131 Programming Languages, I decided to make a context-free grammar in EBNF for my flag! But it looks like some squirrels have eaten away at the parse tree...\n",
+   "files": [
+    "README.md",
+    "grammar-notes.txt",
+    "tree.png"
+   ],
+   "known_flag": null,
+   "size": 153681,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:NewYear/2024/misc/Two_points_again",
+   "ctf": "NewYear",
+   "year": "2024",
+   "category": "misc",
+   "name": "Two_points_again",
+   "dir": "NewYear/2024/misc/Two_points_again",
+   "description": "Получил файл с огромными числами. Явно RSA\n\nI received a file with huge numbers. Explicitly RSA\n",
+   "files": [
+    "He_chose_the_wrong_parameters_for_RSA.jpg",
+    "README.md",
+    "output_badRSA1.txt"
+   ],
+   "known_flag": null,
+   "size": 1547322,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:NewYear/2024/misc/dont_go_to_sleep",
+   "ctf": "NewYear",
+   "year": "2024",
+   "category": "misc",
+   "name": "dont_go_to_sleep",
+   "dir": "NewYear/2024/misc/dont_go_to_sleep",
+   "description": "Don't go to sleep\nDon't go, stay up with me\nDon't go, don't go to sleep\nDon't go, stay up and don't go to sleep\nOoh, ahh, ahh, ahh\nDon't go, don't go to sleep\nDon't go, stay up and don't...\n",
+   "files": [
+    "README.md",
+    "don't go to sleep.zip",
+    "editn.jpg"
+   ],
+   "known_flag": null,
+   "size": 483888,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:PatriotCTF/2024/misc/Emoji_Stack_V2",
+   "ctf": "PatriotCTF",
+   "year": "2024",
+   "category": "misc",
+   "name": "Emoji_Stack_V2",
+   "dir": "PatriotCTF/2024/misc/Emoji_Stack_V2",
+   "description": "Back by popular demand, V2 of EmojiStack is ready to release! Following user feedback, we've made some changes to how things work:\n\nIt was pointed out that EmojiStack wasn't actually turing complete, and was instead just \"A really dumb markup language.\" To remedy this, we've added three new commands for execution control, please see details below. Sticking with our philosophy of readability, we figured that hex numbers are too complicated and have decided to switch to easily read emoji representations. Numbers will now be encoded in base 12 from 🕛 to 🕚. Example: 🔁5f --> 🔁🕛🕖🕚 For our second release, it only seemed fair to add a second stack dimension! Emoji Stack now supports a 255x255 grid of cells. With the addition of two dimensional stacks, a good idea fairy said it might be cool to represent stack states using images. The state of the stack is now saved as a 255x255 8 bit grey scale image to allow for the pre-initialization of the stack. Images are stored raster-scan order with 0,0 being the top left of the image.\n\nCommands\n\n    👉: Move the stack pointer one cell to the right\n    👈: Move the stack pointer one cell to the left\n    👆: Move the stack pointer one cell upwards\n    👇: Move the stack pointer one cell downwards\n    👍: Increment the current cell by one, bounded by 255\n    👎: Decrement the current cell by one, bounded by 0\n    💬: Print the ASCII value of the current cell\n    👂: Read one character of ASCII and store it in the current cell\n    🫸: If the current cell is zero, jump to the next instruction after the respective 🫷\n    🫷: If the current cell is non-zero, jump back to the respective 🫸\n    🔁###: Repeat the previous instruction ## times\n\nAuthor: CACI\n",
+   "files": [
+    "README.md",
+    "initial_state.png",
+    "program.txt"
+   ],
+   "known_flag": null,
+   "size": 354304,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:ShunyaCTF/2024/forensic/Lost_My_Keyboard",
+   "ctf": "ShunyaCTF",
+   "year": "2024",
+   "category": "forensic",
+   "name": "Lost_My_Keyboard",
+   "dir": "ShunyaCTF/2024/forensic/Lost_My_Keyboard",
+   "description": "Spilled some coffee onto my keyboard\n",
+   "files": [
+    "Challenge.pcapng.xz",
+    "README.md",
+    "The Desktop.png"
+   ],
+   "known_flag": null,
+   "size": 121967,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:TSG/2023/misc/Qqqode",
+   "ctf": "TSG",
+   "year": "2023",
+   "category": "misc",
+   "name": "Qqqode",
+   "dir": "TSG/2023/misc/Qqqode",
+   "description": "JA / EN\n\nDon't worry, we didn't bake it or paste it into a Rubik's cube.\n",
+   "files": [
+    "README.md",
+    "flag.png",
+    "main.py",
+    "requirements.txt"
+   ],
+   "known_flag": null,
+   "size": 5709,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:osuigaming/2024/misc/egg_pain",
+   "ctf": "osuigaming",
+   "year": "2024",
+   "category": "misc",
+   "name": "egg_pain",
+   "dir": "osuigaming/2024/misc/egg_pain",
+   "description": "sahuang\n\nI hid a message in my unfinished diff for ParagonX9 - Chaoz Fantasy. Could you figure it out?\n",
+   "files": [
+    "Chaoz Fantasy Dragon.jpg",
+    "ParagonX9 - Chaoz Fantasy (onlyforyou) [egg pain].osu",
+    "README.md"
+   ],
+   "known_flag": null,
+   "size": 313479,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:osuigaming/2024/forensic/out_of_slide",
+   "ctf": "osuigaming",
+   "year": "2024",
+   "category": "forensic",
+   "name": "out_of_slide",
+   "dir": "osuigaming/2024/forensic/out_of_slide",
+   "description": "BrokenAppendix\n\nFlag should fit this regex: osu\\{[A-Z_]+\\}.\n",
+   "files": [
+    "Fast.jpg",
+    "No title.mp3",
+    "README.md",
+    "Reol - No title (VINXIS) [Corrupted Appendix's Corrupted].osu"
+   ],
+   "known_flag": null,
+   "size": 2594067,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  },
+  {
+   "id": "ctf-archives:x3ctf/2025/misc/redacted",
+   "ctf": "x3ctf",
+   "year": "2025",
+   "category": "misc",
+   "name": "redacted",
+   "dir": "x3ctf/2025/misc/redacted",
+   "description": "We put the challenge in a zip file and redacted it.<br/>\n<br/>\nNote: This challenge is fully solvable both on Windows and Linux, although it's slightly easier on the former.\n\nAuthor: rebane2001",
+   "files": [
+    "README.md",
+    "how_to_check.png",
+    "readme.txt"
+   ],
+   "known_flag": null,
+   "size": 188862,
+   "source": "https://github.com/sajjadium/ctf-archives"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+CTF-Misc-Tool 自检报告
+========================================
+[PASS] 二维码生成与识别(OpenCV/pyzbar) ['flag{selftest_qr}']
+[PASS] PNG LSB 提取 ['flag{selftest_lsb}']
+[PASS] PNG 结构解析 
+[PASS] ZIP 解包与注释 ['flag{selftest_zip_comment}', 'flag{selftest_zip}']
+[PASS] 多层编码自动解码 ['flag{selftest_codec}']
+[PASS] 依赖 numpy 
+[PASS] 依赖 OpenCV 
+[PASS] 依赖 pyzbar 
+[PASS] 依赖 7z 支持 
+[PASS] 依赖 cryptography 
+[PASS] 依赖 PDF 解析 
+[PASS] 题库可读取（159 题） 
+[PASS] Web 模块（源码审计） ['flag{selftest_web_ok}']
+[PASS] 文档/沙箱辅助模块 
+
+失败项：0
