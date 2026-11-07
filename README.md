@@ -56,7 +56,6 @@ CTF-Misc-Tool/
 ## 本地运行（开发）
 
 ```powershell
-$py = "C:\Users\kun\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 $env:PYTHONPATH = "outputs/CTF-Misc-Tool/src"
 & $py -m ctfmisc                      # 启动界面
 & $py outputs/CTF-Misc-Tool/tests/selftest.py   # 跑自检（15 项）
