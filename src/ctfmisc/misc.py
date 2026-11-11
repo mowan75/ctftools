@@ -25,9 +25,15 @@ def qr_decode(data: bytes) -> list[str]:
         img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
         if img is None:
             return results
+        # 大图先降采样：二维码检测在 2888x3788 上单次就要 2 秒，
+        # 缩到长边 1400 以内仍然可识别，速度提升明显
+        h, w = img.shape[:2]
+        if max(h, w) > 1400:
+            scale = 1400 / max(h, w)
+            img = cv2.resize(img, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+            h, w = img.shape[:2]
         detector = cv2.QRCodeDetector()
         variants = [("原图", img)]
-        h, w = img.shape[:2]
         if max(h, w) < 1200:
             variants.append(("放大 3x", cv2.resize(img, None, fx=3, fy=3, interpolation=cv2.INTER_CUBIC)))
         variants.append(("反色", 255 - img))

@@ -1,4 +1,4 @@
-"""CTF 杂项解题助手 —— 卡片式桌面主界面。"""
+"""CTF 杂项解题助手 —— 卡片式桌面主界面（现代浅色主题）。"""
 
 from __future__ import annotations
 
@@ -10,12 +10,15 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
 from .. import APP_NAME, __version__, report as report_mod
-from . import actions, cards, tabs
+from . import actions, cards, tabs, theme
+from .theme import (BORDER, FONT_MONO, FONT_SMALL, FONT_TITLE, HEADER_LEFT,
+                    HEADER_RIGHT, INK, MUTED, PAGE_BG, PRIMARY, PRIMARY_SOFT,
+                    SUCCESS, SUCCESS_SOFT, SURFACE, WARN, mix, round_rect)
 
-FONT = ("Microsoft YaHei UI", 10)
-FONT_SMALL = ("Microsoft YaHei UI", 9)
-FONT_MONO = ("Consolas", 10)
-PAGE_BG = "#f3f4f6"
+FONT = theme.FONT_UI
+FONT_SMALL = theme.FONT_SMALL
+
+HEADER_H = 88
 
 
 def resource_dir() -> str:
@@ -37,12 +40,24 @@ def asset_path(name: str) -> str:
     return os.path.join(base, "assets", name)
 
 
+def _surface(parent, bg: str = SURFACE) -> tk.Frame:
+    return tk.Frame(parent, bg=bg, highlightbackground=BORDER, highlightthickness=1)
+
+
 class App(tk.Tk):
     def __init__(self) -> None:
+        try:
+            import ctypes
+            ctypes.windll.shcore.SetProcessDpiAwareness(1)   # 高 DPI 下字体清晰、坐标一致
+        except Exception:
+            pass
         super().__init__()
         self.title(f"{APP_NAME}  v{__version__}")
-        self.geometry("1280x840")
-        self.minsize(1120, 720)
+        sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
+        w = min(1360, sw - 60)
+        h = min(900, sh - 100)
+        self.geometry(f"{w}x{h}+{max(10, (sw - w) // 2)}+{max(10, (sh - h) // 2)}")
+        self.minsize(min(1100, sw - 80), min(700, sh - 120))
         self.configure(bg=PAGE_BG)
         try:
             self.iconbitmap(default=asset_path("app.ico"))
@@ -52,105 +67,259 @@ class App(tk.Tk):
         self.cancel_flag = threading.Event()
         self.report = None
         self.last_paths: list[str] = []
+        self.last_evidence: list[str] = []
+        self.web_url: str = ""
         self.busy = False
         self._tool_refs = []
         self._log_queue: queue.Queue[str] = queue.Queue()
         self.cases: list[report_mod.Case] = []
         self._drain_scheduled = False
-        self._style()
-        self._toolbar()
-        self._body()
+        self._view = "result"
+        self._total_cards = 0
+        theme.apply_theme(self)
+        self._header()
         self._statusbar()
+        self._body()
         self._bind_drop()
         self.after(300, self._drain_log)
+        self.after(900, self._warm_ocr)
 
     # ------------------------------------------------------------------ #
-    def _style(self) -> None:
-        style = ttk.Style(self)
-        try:
-            style.theme_use("vista")
-        except tk.TclError:
-            try:
-                style.theme_use("clam")
-            except tk.TclError:
-                pass
-        style.configure(".", font=FONT)
-        style.configure("TButton", padding=(10, 5))
-        style.configure("Accent.TButton", font=("Microsoft YaHei UI", 10, "bold"))
-        style.configure("TEntry", padding=4)
-        self.option_add("*Font", FONT)
-
-    def _toolbar(self) -> None:
-        bar = tk.Frame(self, bg="#ffffff", height=58)
-        bar.pack(fill="x")
-        bar.pack_propagate(False)
-        tk.Label(bar, text=APP_NAME, bg="#ffffff", fg="#111827",
-                 font=("Microsoft YaHei UI", 13, "bold")).pack(side="left", padx=(16, 4))
-        tk.Label(bar, text=f"v{__version__}", bg="#ffffff", fg="#9ca3af",
-                 font=FONT_SMALL).pack(side="left", pady=(6, 0))
-        ttk.Button(bar, text="打开文件", command=self.pick_file_and_set).pack(side="left", padx=(18, 4))
-        ttk.Button(bar, text="▶ 全自动分析", style="Accent.TButton",
-                   command=lambda: self.run_pipeline(on_current_file=True)).pack(side="left", padx=4)
-        self.btn_stop = ttk.Button(bar, text="■ 停止", command=self.stop, state="disabled")
-        self.btn_stop.pack(side="left", padx=4)
-        ttk.Button(bar, text="导出报告", command=self.export_report).pack(side="right", padx=16)
+    # 顶部渐变栏
+    # ------------------------------------------------------------------ #
+    def _header(self) -> None:
+        self.header = tk.Canvas(self, height=HEADER_H, bg=HEADER_LEFT,
+                                highlightthickness=0, bd=0)
+        self.header.pack(fill="x")
         self.search_var = tk.StringVar()
-        entry = ttk.Entry(bar, textvariable=self.search_var, width=22)
-        entry.pack(side="right", padx=(4, 10))
-        entry.bind("<KeyRelease>", lambda _e: self.card_list.filter(self.search_var.get()))
-        tk.Label(bar, text="搜索功能：", bg="#ffffff", fg="#6b7280", font=FONT_SMALL).pack(side="right")
-        self.lbl_file = tk.Label(bar, text="当前文件：（把文件拖进来）", bg="#ffffff", fg="#2563eb",
-                                 font=FONT_SMALL)
-        self.lbl_file.pack(side="right", padx=(10, 20))
+        self.search_entry = ttk.Entry(self.header, textvariable=self.search_var,
+                                      style="Search.TEntry", font=FONT_SMALL)
+        self.search_entry.bind("<KeyRelease>", lambda _e: self.card_list.filter(self.search_var.get()))
+        self._search_win = self.header.create_window(0, 0, window=self.search_entry,
+                                                     anchor="w", width=10, height=28)
+        self.header.bind("<Configure>", self._draw_header)
+        self._draw_header()
 
-    def _body(self) -> None:
-        pane = ttk.PanedWindow(self, orient="horizontal")
-        pane.pack(fill="both", expand=True, padx=10, pady=(8, 4))
+    def _draw_header(self, _event=None) -> None:
+        c = self.header
+        w = max(c.winfo_width(), 1150)
+        c.delete("all")
+        steps = max(1, HEADER_H // 2)
+        for i in range(steps):
+            t = i / max(1, steps - 1)
+            color = mix(HEADER_RIGHT, HEADER_LEFT, t)
+            c.create_line(0, i * 2, w, i * 2, fill=color, width=2, tags="bg")
+            c.create_line(0, i * 2 + 1, w, i * 2 + 1, fill=color, width=1, tags="bg")
+        # 装饰圆
+        c.create_oval(w - 260, -70, w + 60, 130, outline="", fill=mix(HEADER_RIGHT, "#ffffff", 0.10))
+        c.create_oval(w - 470, 40, w - 330, 180, outline="", fill=mix(HEADER_LEFT, "#ffffff", 0.06))
+        c.tag_lower("bg")
 
-        left = tk.Frame(pane, bg=PAGE_BG)
-        pane.add(left, weight=3)
-        tip = tk.Label(left, text="选择下面任意一张卡片开始。多数情况点第一张「全自动分析」就行。",
-                       bg=PAGE_BG, fg="#6b7280", font=FONT_SMALL, anchor="w")
-        tip.pack(fill="x", padx=14, pady=(6, 0))
-        self.card_list = cards.CardList(left)
-        self.card_list.pack(fill="both", expand=True)
-        self.card_list.build(actions.build_sections(self))
+        # 左侧标识与标题
+        round_rect(c, 20, 22, 64, 66, 13, fill="#ffffff", outline="")
+        c.create_text(42, 44, text="CTF", fill=PRIMARY, font=("Microsoft YaHei UI", 12, "bold"))
+        c.create_text(80, 34, text=APP_NAME, anchor="w", fill="#ffffff", font=FONT_TITLE)
+        c.create_text(81, 59, text="Misc · 取证 · 隐写 —— 拖入文件，一键找出 flag",
+                      anchor="w", fill="#dbeafe", font=FONT_SMALL)
+        round_rect(c, 80 + 176, 33, 80 + 232, 51, 8,
+                   fill=mix("#ffffff", HEADER_RIGHT, 0.16), outline="")
+        c.create_text(80 + 204, 42, text=f"v{__version__}", fill="#ffffff",
+                      font=("Microsoft YaHei UI", 8))
 
-        right = tk.Frame(pane)
-        pane.add(right, weight=4)
-        flagbox = ttk.LabelFrame(right, text="flag 候选（双击复制）", padding=6)
-        flagbox.pack(fill="x")
-        self.flags = tk.Listbox(flagbox, font=("Consolas", 11), activestyle="none", height=5,
-                                exportselection=False)
-        self.flags.pack(side="left", fill="both", expand=True)
-        self.flags.bind("<Double-Button-1>", self._copy_flag)
-        ttk.Button(flagbox, text="复制", width=6, command=self._copy_flag).pack(side="right", padx=(6, 0), fill="y")
+        # 右侧：搜索框 + 两个按钮
+        x2 = w - 22
+        auto_x2 = x2
+        auto_x1 = auto_x2 - 152
+        open_x2 = auto_x1 - 10
+        open_x1 = open_x2 - 104
+        search_x2 = open_x1 - 12
+        search_x1 = search_x2 - 236
+        round_rect(c, search_x1, 26, search_x2, 62, 10, fill="#ffffff", outline="")
+        c.create_text(search_x1 + 14, 44, text="⌕", anchor="w", fill="#94a3b8",
+                      font=("Segoe UI Symbol", 13))
+        c.create_text(search_x1 + 34, 44, text="搜索功能", anchor="w", fill="#94a3b8",
+                      font=FONT_SMALL)
+        self._search_win = c.create_window(
+            search_x1 + 92, 44, window=self.search_entry, anchor="w",
+            width=max(60, search_x2 - search_x1 - 104), height=28)
 
-        self.result_box = ttk.LabelFrame(right, text="结果", padding=6)
-        self.result_box.pack(fill="both", expand=True, pady=(6, 0))
-        self.result_title = ttk.Label(self.result_box, text="", font=("Microsoft YaHei UI", 10, "bold"))
-        self.result_title.pack(anchor="w")
-        wrap = ttk.Frame(self.result_box)
-        wrap.pack(fill="both", expand=True)
-        self.result_text = tk.Text(wrap, wrap="word", font=FONT_MONO, undo=True)
-        sb = ttk.Scrollbar(wrap, orient="vertical", command=self.result_text.yview)
-        self.result_text.configure(yscrollcommand=sb.set)
-        self.result_text.pack(side="left", fill="both", expand=True)
-        sb.pack(side="right", fill="y")
+        round_rect(c, open_x1, 26, open_x2, 62, 10, fill=mix("#ffffff", HEADER_RIGHT, 0.14),
+                   outline="#ffffff", width=1)
+        c.create_text((open_x1 + open_x2) / 2, 44, text="打开文件", fill="#ffffff",
+                      font=FONT_SMALL)
+        round_rect(c, auto_x1, 26, auto_x2, 62, 10, fill="#ffffff", outline="")
+        c.create_text((auto_x1 + auto_x2) / 2, 44, text="▶ 全自动分析", fill=PRIMARY,
+                      font=("Microsoft YaHei UI", 9, "bold"))
+        # 用透明矩形承载点击区域
+        for x1, x2, tag in ((open_x1, open_x2, "hdr_open"), (auto_x1, auto_x2, "hdr_auto")):
+            rid = c.create_rectangle(x1, 26, x2, 62, outline="", fill="", tags=("hdr_hit", tag))
+            c.tag_bind(tag, "<Button-1>", lambda _e, f=(self.pick_file_and_set if tag == "hdr_open" else self.run_auto): f())
+            c.tag_bind(tag, "<Enter>", lambda _e: c.configure(cursor="hand2"))
+            c.tag_bind(tag, "<Leave>", lambda _e: c.configure(cursor=""))
+            c.tag_raise(rid)
+        c.tag_raise(self._search_win)
 
-        logbox = ttk.LabelFrame(right, text="日志", padding=6)
-        logbox.pack(fill="both", expand=True, pady=(6, 0))
-        self.log_text = tk.Text(logbox, height=7, wrap="word", font=FONT_SMALL)
-        self.log_text.pack(fill="both", expand=True)
-
+    # ------------------------------------------------------------------ #
     def _statusbar(self) -> None:
-        bar = tk.Frame(self, bg="#ffffff", height=30)
-        bar.pack(fill="x")
+        bar = tk.Frame(self, bg=SURFACE, height=36, highlightbackground=BORDER,
+                       highlightthickness=1)
+        bar.pack(fill="x", side="bottom")
         bar.pack_propagate(False)
-        self.lbl_status = tk.Label(bar, text="就绪", bg="#ffffff", fg="#374151", font=FONT_SMALL)
-        self.lbl_status.pack(side="left", padx=14)
-        self.progress = ttk.Progressbar(bar, mode="indeterminate", length=160)
-        self.progress.pack(side="right", padx=14, pady=4)
+        self.lbl_status = tk.Label(bar, text="就绪", bg=SURFACE, fg="#475569",
+                                   font=FONT_SMALL)
+        self.lbl_status.pack(side="left", padx=16)
+        self.lbl_file = tk.Label(bar, text="未选择文件", bg=PRIMARY_SOFT, fg=PRIMARY,
+                                 font=FONT_SMALL, padx=10, pady=2)
+        self.lbl_file.pack(side="right", padx=14)
+        self.progress = ttk.Progressbar(bar, mode="indeterminate", length=150)
+        self.progress.pack(side="right", padx=(0, 10), pady=6)
+        self.lbl_hint = tk.Label(bar, text="拖入题目文件即可开始", bg=SURFACE, fg="#94a3b8",
+                                 font=FONT_SMALL)
+        self.lbl_hint.pack(side="right", padx=10)
+
+    # ------------------------------------------------------------------ #
+    def _body(self) -> None:
+        body = tk.Frame(self, bg=PAGE_BG)
+        body.pack(fill="both", expand=True, padx=14, pady=(12, 10))
+        body.columnconfigure(0, weight=3)
+        body.columnconfigure(1, weight=2)
+        body.rowconfigure(0, weight=1)
+
+        left = _surface(body)
+        left.grid(row=0, column=0, sticky="nsew", padx=(0, 12))
+        head = tk.Frame(left, bg=SURFACE)
+        head.pack(fill="x", padx=16, pady=(14, 6))
+        tk.Label(head, text="工具卡片", bg=SURFACE, fg=INK,
+                 font=("Microsoft YaHei UI", 11, "bold")).pack(side="left")
+        self.lbl_cards = tk.Label(head, text="", bg=PRIMARY_SOFT, fg=PRIMARY,
+                                  font=theme.FONT_TINY, padx=8, pady=1)
+        self.lbl_cards.pack(side="left", padx=8)
+        tk.Label(head, text="点击卡片即执行；搜索框可按功能过滤", bg=SURFACE, fg=MUTED,
+                 font=FONT_SMALL).pack(side="right")
+        self.card_list = cards.CardList(left)
+        self.card_list.pack(fill="both", expand=True, padx=(6, 4), pady=(0, 8))
+        self.card_list.build(actions.build_sections(self))
+        self._total_cards = len(self.card_list._cards)
+        self.lbl_cards.configure(text=f"{self._total_cards} 项功能")
+
+        right = tk.Frame(body, bg=PAGE_BG)
+        right.grid(row=0, column=1, sticky="nsew")
+        right.columnconfigure(0, weight=1)
+        right.rowconfigure(1, weight=1)
+
+        # flag 候选
+        flagcard = _surface(right)
+        flagcard.grid(row=0, column=0, sticky="ew")
+        fh = tk.Frame(flagcard, bg=SURFACE)
+        fh.pack(fill="x", padx=14, pady=(12, 6))
+        tk.Label(fh, text="●", bg=SURFACE, fg=SUCCESS,
+                 font=("Microsoft YaHei UI", 9)).pack(side="left")
+        tk.Label(fh, text="flag 候选", bg=SURFACE, fg=INK,
+                 font=("Microsoft YaHei UI", 10, "bold")).pack(side="left", padx=(6, 6))
+        self.lbl_flag_count = tk.Label(fh, text="0", bg=SUCCESS_SOFT, fg=SUCCESS,
+                                       font=theme.FONT_TINY, padx=8, pady=1)
+        self.lbl_flag_count.pack(side="left")
+        self.btn_copy = ttk.Button(fh, text="复制", style="Soft.TButton",
+                                   command=self._copy_flag)
+        self.btn_copy.pack(side="right")
+        self.flags = tk.Listbox(flagcard, font=("Consolas", 11), height=4, bd=0,
+                                highlightthickness=0, activestyle="none",
+                                exportselection=False, bg="#fbfdff", fg="#065f46",
+                                selectbackground="#d1fae5", selectforeground="#064e3b")
+        self.flags.pack(fill="x", padx=12, pady=(0, 12))
+        self.flags.bind("<Double-Button-1>", self._copy_flag)
+        self.flags.bind("<Return>", self._copy_flag)
+
+        # 结果 / 日志
+        rescard = _surface(right)
+        rescard.grid(row=1, column=0, sticky="nsew", pady=(10, 0))
+        rh = tk.Frame(rescard, bg=SURFACE)
+        rh.pack(fill="x", padx=14, pady=(10, 4))
+        self.tab_result = tk.Label(rh, text="结果", bg=PRIMARY_SOFT, fg=PRIMARY,
+                                   font=("Microsoft YaHei UI", 9, "bold"), padx=10, pady=3)
+        self.tab_result.pack(side="left")
+        self.tab_log = tk.Label(rh, text="日志", bg=SURFACE, fg=MUTED,
+                                font=FONT_SMALL, padx=10, pady=3)
+        self.tab_log.pack(side="left", padx=4)
+        self.tab_meta = tk.Label(rh, text="题面", bg=SURFACE, fg=MUTED,
+                                 font=FONT_SMALL, padx=10, pady=3)
+        self.tab_meta.pack(side="left", padx=4)
+        for wdg, name in ((self.tab_result, "result"), (self.tab_log, "log"),
+                          (self.tab_meta, "meta")):
+            wdg.bind("<Button-1>", lambda _e, n=name: self._switch_view(n))
+        self.result_title = tk.Label(rh, text="", bg=SURFACE, fg=MUTED,
+                                     font=FONT_SMALL, anchor="e")
+        self.result_title.pack(side="right")
+
+        holder = tk.Frame(rescard, bg=SURFACE)
+        holder.pack(fill="both", expand=True, padx=10, pady=(0, 10))
+        holder.columnconfigure(0, weight=1)
+        holder.rowconfigure(0, weight=1)
+        self._result_wrap = tk.Frame(holder, bg=SURFACE)
+        self._log_wrap = tk.Frame(holder, bg=SURFACE)
+        self._meta_wrap = tk.Frame(holder, bg=SURFACE)
+        for wrap in (self._result_wrap, self._log_wrap, self._meta_wrap):
+            wrap.grid(row=0, column=0, sticky="nsew")
+
+        self.result_text = self._make_text(self._result_wrap)
+        self.log_text = self._make_text(self._log_wrap)
+        self.meta_text = self._make_text(self._meta_wrap)
+        self._meta_ready = False
+        self._switch_view("result")
+
+    def _make_text(self, parent) -> tk.Text:
+        text = tk.Text(parent, wrap="word", font=FONT_MONO, width=1, bd=0, highlightthickness=0,
+                       bg=SURFACE, fg="#1e293b", padx=6, pady=6,
+                       spacing1=2, spacing3=3, insertbackground=PRIMARY,
+                       selectbackground="#e0e7ff", selectforeground=INK)
+        sb = ttk.Scrollbar(parent, orient="vertical", command=text.yview)
+        text.configure(yscrollcommand=sb.set)
+        text.pack(side="left", fill="both", expand=True)
+        sb.pack(side="right", fill="y")
+        return text
+
+    def _switch_view(self, name: str) -> None:
+        self._view = name
+        wraps = {"result": self._result_wrap, "log": self._log_wrap, "meta": self._meta_wrap}
+        wraps.get(name, self._result_wrap).lift()
+        for wdg, key in ((self.tab_result, "result"), (self.tab_log, "log"),
+                         (self.tab_meta, "meta")):
+            active = key == name
+            wdg.configure(bg=PRIMARY_SOFT if active else SURFACE,
+                          fg=PRIMARY if active else MUTED,
+                          font=("Microsoft YaHei UI", 9, "bold") if active else FONT_SMALL)
+
+    def show_meta(self, meta: dict | None) -> None:
+        """题库题面：赛制 / 题目 / 描述 / flag 格式 / 附件。"""
+        self.meta_text.delete("1.0", "end")
+        if not meta:
+            self.meta_text.insert("end", "当前分析对象不在内置题库中。\n\n"
+                                          "把题库里的题目目录拖进来，这里会显示题面与 flag 格式。")
+            self._meta_ready = False
+            return
+        lines = [f"{meta.get('ctf', '')} {meta.get('year', '')} · {meta.get('category', '')}",
+                 f"{meta.get('name', '')}", ""]
+        desc = (meta.get("description") or "").strip()
+        lines.append(desc or "（题面为空）")
+        fmt = (meta.get("known_flag") or "").strip()
+        if fmt:
+            lines += ["", f"flag 格式：{fmt}"]
+        files = meta.get("files") or []
+        if files:
+            lines += ["", "附件："] + [f"  · {f}" for f in files[:20]]
+        self.meta_text.insert("end", "\n".join(lines))
+        self._meta_ready = True
+
+    def _warm_ocr(self) -> None:
+        """后台预加载 OCR 模型，避免第一张图等十几秒。"""
+        def job():
+            try:
+                from .. import ocr
+                if ocr.available():
+                    ocr._get_engine()
+            except Exception:
+                pass
+        threading.Thread(target=job, daemon=True).start()
 
     def _bind_drop(self) -> None:
         try:
@@ -186,7 +355,8 @@ class App(tk.Tk):
 
     def set_current_file(self, path: str) -> None:
         self.current_file = path
-        self.lbl_file.configure(text=f"当前文件：{os.path.basename(path)}")
+        name = os.path.basename(path.rstrip("\\/")) or path
+        self.lbl_file.configure(text=name if len(name) <= 28 else name[:26] + "…")
 
     def status_set(self, text: str) -> None:
         self.lbl_status.configure(text=text)
@@ -215,9 +385,15 @@ class App(tk.Tk):
         self.result_text.delete("1.0", "end")
         self.flags.delete(0, "end")
         self.result_title.configure(text="")
+        self.lbl_flag_count.configure(text="0")
+        try:
+            self.show_meta(None)
+        except Exception:
+            pass
 
     def show_result(self, title: str, text: str, flags=None, items=None) -> None:
         self.result_title.configure(text=title)
+        self._switch_view("result")
         self.result_text.delete("1.0", "end")
         if items:
             for k, v in items:
@@ -229,16 +405,18 @@ class App(tk.Tk):
         for f in flags or []:
             if f and f not in seen:
                 seen.add(f)
-                self.flags.insert("end", f)
+                self.flags.insert("end", f"  {f}")
+        self.lbl_flag_count.configure(text=str(len(seen)))
         self.status_set(f"{title} 完成" + (f"，命中 {len(seen)} 个 flag 候选" if seen else ""))
 
     def show_busy(self, busy: bool) -> None:
         self.busy = busy
-        self.btn_stop.configure(state="normal" if busy else "disabled")
         if busy:
             self.progress.start(12)
+            self.lbl_hint.configure(text="分析中…")
         else:
             self.progress.stop()
+            self.lbl_hint.configure(text="拖入题目文件即可开始")
 
     def worker(self, fn, on_done=None, on_error=None) -> None:
         def target():
@@ -257,6 +435,23 @@ class App(tk.Tk):
     def stop(self) -> None:
         self.cancel_flag.set()
         self.status_set("正在停止…")
+
+    def _add_paths(self, paths) -> None:
+        """把外部提取结果加入分析队列（高级面板 / 题库使用）。"""
+        paths = [p for p in paths if p and os.path.exists(p)]
+        if not paths:
+            return
+        self.set_current_file(paths[0])
+        self.run_pipeline(paths=paths)
+
+    def run_auto(self) -> None:
+        """顶部 / 高级面板的“开始”：有历史路径就跑历史，否则选文件。"""
+        if self.last_paths:
+            self.run_pipeline(paths=self.last_paths)
+        elif self.current_file:
+            self.run_pipeline(on_current_file=True)
+        else:
+            self.pick_file_and_set()
 
     # ------------------------------------------------------------------ #
     def run_pipeline(self, paths=None, on_current_file: bool = False) -> None:
@@ -287,9 +482,13 @@ class App(tk.Tk):
         def done(report):
             self.show_busy(False)
             self.report = report
-            name = os.path.basename(paths[0].rstrip("\\/")) or paths[0]
+            meta = getattr(report, "meta", None)
+            name = (meta or {}).get("name") or os.path.basename(paths[0].rstrip("\\/")) or paths[0]
             case = report_mod.cases_from_pipeline(report, name=name)
             self.add_case(case)
+            self.show_meta(meta)
+            if meta:
+                self.status_set(f"题库题目：{meta.get('ctf', '')} / {name}")
             if case.flags:
                 self.show_result(f"✅ 解出：{name}", report_mod.build_quick_report(case),
                                  flags=case.flags)
@@ -306,8 +505,7 @@ class App(tk.Tk):
                 self.show_result(f"未自动解出：{name}", "\n".join(lines))
                 self.status_set("没有自动解出，请按提示用专项卡片继续")
             outdir = getattr(report, "outdir", "") or ""
-            import os as _os
-            if outdir and _os.path.isdir(outdir):
+            if outdir and os.path.isdir(outdir):
                 self.result_text.insert("end", f"\n\n生成的文件都在：{outdir}\n")
                 self.status_set(f"完成。生成的文件：{outdir}")
                 if not getattr(self, "_opened_outdir", False):
@@ -332,10 +530,10 @@ class App(tk.Tk):
                   "library": "内置题库（159 道公开题目）"}
         win = tk.Toplevel(self)
         win.title(titles.get(key, key))
-        win.geometry("1080x760" if key != "library" else "1180x780")
+        win.geometry("1120x780" if key != "library" else "1200x800")
         win.configure(bg=PAGE_BG)
-        frame = ttk.Frame(win)
-        frame.pack(fill="both", expand=True, padx=8, pady=8)
+        frame = ttk.Frame(win, padding=10)
+        frame.pack(fill="both", expand=True)
         tab = cls(self, frame)
         tab.frame.pack(fill="both", expand=True)
         if hasattr(tab, "on_activate"):
@@ -348,10 +546,10 @@ class App(tk.Tk):
     def open_advanced(self) -> None:
         win = tk.Toplevel(self)
         win.title("高级工具面板 —— 全部专项工具")
-        win.geometry("1240x820")
+        win.geometry("1260x840")
         win.configure(bg=PAGE_BG)
         nb = ttk.Notebook(win)
-        nb.pack(fill="both", expand=True, padx=8, pady=8)
+        nb.pack(fill="both", expand=True, padx=10, pady=10)
         built = {}
         for key, cls, title in (("codec", tabs.CodecTab, "编码 / 密码"),
                                 ("image", tabs.ImageTab, "图片隐写"),
@@ -376,7 +574,6 @@ class App(tk.Tk):
         nb.bind("<<NotebookTabChanged>>", on_change)
 
     def add_case(self, case) -> None:
-        """记录一道题的解题结果（供导出 writeup 用）。"""
         for i, old in enumerate(self.cases):
             if old.name == case.name and old.category == case.category:
                 self.cases[i] = case
@@ -384,7 +581,6 @@ class App(tk.Tk):
         self.cases.append(case)
 
     def export_writeup(self) -> None:
-        """按 CTF 报告模板导出 writeup（只含解出 flag 的步骤）。"""
         if not self.cases:
             messagebox.showinfo("提示", "还没有解题记录。先跑一次「全自动分析」或「Web 一键自动解题」。")
             return
@@ -392,18 +588,19 @@ class App(tk.Tk):
         dialog.title("导出解题报告（writeup）")
         dialog.configure(bg=PAGE_BG)
         dialog.transient(self)
-        body = ttk.Frame(dialog, padding=16)
+        body = ttk.Frame(dialog, padding=18)
         body.pack(fill="both", expand=True)
         ttk.Label(body, text="导出 writeup（格式对齐 CTF 报告模板）",
-                  font=("Microsoft YaHei UI", 11, "bold")).pack(anchor="w", pady=(0, 8))
-        ttk.Label(body, text="战队名称").pack(anchor="w")
+                  font=("Microsoft YaHei UI", 11, "bold")).pack(anchor="w", pady=(0, 10))
+        ttk.Label(body, text="战队名称", style="Muted.TLabel").pack(anchor="w")
         team = ttk.Entry(body, width=44)
         team.insert(0, "XXX战队")
-        team.pack(fill="x", pady=(0, 6))
-        ttk.Label(body, text="排名（可留空）").pack(anchor="w")
+        team.pack(fill="x", pady=(0, 8))
+        ttk.Label(body, text="排名（可留空）", style="Muted.TLabel").pack(anchor="w")
         ranking = ttk.Entry(body, width=44)
-        ranking.pack(fill="x", pady=(0, 10))
-        info = tk.Text(body, height=8, width=72)
+        ranking.pack(fill="x", pady=(0, 12))
+        info = tk.Text(body, height=8, width=72, bd=0, highlightthickness=1,
+                       highlightbackground=BORDER, bg="#fbfdff", padx=10, pady=8)
         info.insert("1.0", "本报告只保留“解出 flag 的关键步骤”，"
                            "自动忽略没有产生结果的探测过程。\n\n"
                            f"当前已记录 {len(self.cases)} 道题，"
@@ -425,9 +622,9 @@ class App(tk.Tk):
             self.show_result("解题报告已导出", writeup[:4000])
             messagebox.showinfo("完成", f"writeup 已保存到\n{path}")
         btns = ttk.Frame(body)
-        btns.pack(fill="x", pady=(10, 0))
-        ttk.Button(btns, text="导出", command=do_export).pack(side="right")
-        ttk.Button(btns, text="取消", command=dialog.destroy).pack(side="right", padx=6)
+        btns.pack(fill="x", pady=(12, 0))
+        ttk.Button(btns, text="导出", style="Accent.TButton", command=do_export).pack(side="right")
+        ttk.Button(btns, text="取消", command=dialog.destroy).pack(side="right", padx=8)
 
     def run_selftest_dialog(self) -> None:
         from ..__main__ import run_selftest
@@ -453,9 +650,10 @@ class App(tk.Tk):
     def _copy_flag(self, _event=None) -> None:
         sel = self.flags.curselection()
         if sel:
+            value = self.flags.get(sel[0]).strip()
             self.clipboard_clear()
-            self.clipboard_append(self.flags.get(sel[0]))
-            self.status_set("已复制到剪贴板")
+            self.clipboard_append(value)
+            self.status_set(f"已复制：{value}")
 
     def export_report(self) -> None:
         if not self.report:
@@ -485,7 +683,7 @@ def main() -> int:
         targets = [p for p in sys.argv[1:] if os.path.exists(p)]
         if targets:
             app.set_current_file(targets[0])
-            app.after(400, lambda: app.run_pipeline(paths=targets))
+            app.after(500, lambda: app.run_pipeline(paths=targets))
     app.mainloop()
     return 0
 

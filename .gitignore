@@ -17,3 +17,8 @@ desktop.ini
 # Runtime logs
 *.log
 启动日志.txt
+
+# 运行产物
+自检结果.txt
+分析结果.txt
+*_分析结果/

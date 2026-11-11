@@ -8,6 +8,7 @@ import zlib
 from dataclasses import dataclass, field
 
 from PIL import Image
+import numpy as np
 
 from . import filetypes
 from .flags import find_flags
@@ -35,6 +36,22 @@ def open_image(data: bytes) -> Image.Image | None:
 def preview(raw: bytes, limit: int = 400) -> str:
     txt = raw[:limit].decode("utf-8", "replace")
     return "".join(c if (c.isprintable() or c in "\r\n\t") else "·" for c in txt)
+
+
+_BLOB_MAGICS = (b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff", b"GIF8", b"PK\x03\x04",
+                b"%PDF", b"\x1f\x8b", b"BZh", b"7z\xbc\xaf\x27\x1c", b"Rar!")
+
+
+def interesting_blob(blob: bytes) -> bool:
+    """LSB/位平面里除了文本，也可能直接藏整张图或压缩包——这些同样要交给下一步分析。"""
+    if not blob:
+        return False
+    if blob.startswith(_BLOB_MAGICS):
+        return True
+    if text_like(blob):
+        return True
+    head = blob[:65536].decode("latin-1", "ignore")
+    return bool(find_flags(head))
 
 
 def text_like(blob: bytes) -> bool:
@@ -439,43 +456,23 @@ def _pixel_bytes(img: Image.Image) -> tuple[bytes, int, int]:
     return rgba.tobytes(), rgba.width, rgba.height
 
 
+def _rgba_flat(img: Image.Image):
+    return np.asarray(img.convert("RGBA"), dtype=np.uint8).reshape(-1, 4)
+
+
 def lsb_sequential(img: Image.Image, channels: tuple[int, ...] = (0, 1, 2), bit: int = 0,
                    msb_first: bool = True, stride: int = 1, start: int = 0) -> bytes:
-    raw, w, h = _pixel_bytes(img)
-    n = w * h
-    out = bytearray()
-    acc = 0
-    count = 0
-    for idx in range(start, n, stride):
-        base = idx * 4
-        for ch in channels:
-            b = raw[base + ch]
-            acc = (acc << 1) | ((b >> bit) & 1) if msb_first else (acc | (((b >> bit) & 1) << count))
-            count += 1
-            if count == 8:
-                out.append(acc & 0xFF)
-                acc = 0
-                count = 0
-            if len(out) >= 1024 * 512:
-                return bytes(out)
-    return bytes(out)
+    """按像素顺序取指定通道的第 bit 位，8 位拼一个字节（numpy 向量化，比逐像素快两个数量级）。"""
+    sel = _rgba_flat(img)[start::max(stride, 1)][:, list(channels)]
+    bits = ((sel >> bit) & 1).astype(np.uint8).reshape(-1)
+    packed = np.packbits(bits, bitorder="big" if msb_first else "little")
+    return packed[: 1024 * 512].tobytes()
 
 
 def lsb_bitplane(img: Image.Image, channel: int = 0, plane: int = 0) -> bytes:
     """把第 plane 个位平面按 8 像素一个字节还原。"""
-    raw, w, h = _pixel_bytes(img)
-    out = bytearray()
-    acc = 0
-    count = 0
-    for i in range(w * h):
-        bit = (raw[i * 4 + channel] >> plane) & 1
-        acc = (acc << 1) | bit
-        count += 1
-        if count == 8:
-            out.append(acc)
-            acc = 0
-            count = 0
-    return bytes(out)
+    bits = ((_rgba_flat(img)[:, channel] >> plane) & 1).astype(np.uint8)
+    return np.packbits(bits, bitorder="big").tobytes()
 
 
 def lsb_candidates(img: Image.Image, quick: bool = True) -> list[tuple[str, bytes]]:
@@ -911,6 +908,49 @@ def gif_analyze(data: bytes) -> list[Finding]:
     return findings
 
 
+def low_contrast_variants(data: bytes, max_colors: int = 96,
+                          max_delta: int = 40) -> list[tuple[str, bytes]]:
+    """“白底白字”类题：整张图近乎纯色，信息藏在极微弱的色差里。
+
+    对每个通道做 min-max 拉伸（以及最亮/最暗通道之差），把 1~3 级的色差
+    放大到 0~255，之后交给 OCR / 人眼都能看清。普通照片颜色数多，直接跳过。
+    """
+    img = open_image(data)
+    if img is None:
+        return []
+    arr = np.asarray(img.convert("RGB"))
+    if arr.size == 0:
+        return []
+    h, w, _ = arr.shape
+    step_y, step_x = max(1, h // 160), max(1, w // 160)
+    sample = arr[::step_y, ::step_x].reshape(-1, 3)
+    if len(np.unique(sample, axis=0)) > max_colors:
+        return []
+    out: list[tuple[str, bytes]] = []
+    seen: set[bytes] = set()
+
+    def emit(label: str, gray) -> None:
+        buf = io.BytesIO()
+        Image.fromarray(gray).save(buf, "PNG")
+        blob = buf.getvalue()
+        if blob not in seen:
+            seen.add(blob)
+            out.append((label, blob))
+
+    for ch, name in enumerate("RGB"):
+        v = arr[:, :, ch].astype(np.int16)
+        lo, hi = int(v.min()), int(v.max())
+        if hi - lo < 1 or hi - lo > max_delta:
+            continue
+        emit(f"{name} 通道色差拉伸", ((v - lo) * 255 // (hi - lo)).astype(np.uint8))
+    mx = arr.max(axis=2).astype(np.int16)
+    mn = arr.min(axis=2).astype(np.int16)
+    d = mx - mn
+    if 0 < int(d.max()) <= max_delta:
+        emit("通道差值拉伸", (d * 255 // int(d.max())).astype(np.uint8))
+    return out
+
+
 def analyze(data: bytes, deep_lsb: bool = False) -> list[Finding]:
     """对图片做整体取证分析。"""
     findings: list[Finding] = []
@@ -931,7 +971,7 @@ def analyze(data: bytes, deep_lsb: bool = False) -> list[Finding]:
     if img is not None:
         findings.append(Finding("info", "图像信息", f"{img.format} {img.mode} {img.width}x{img.height}"))
         for label, blob in lsb_candidates(img, quick=not deep_lsb):
-            if text_like(blob):
+            if interesting_blob(blob):
                 findings.append(Finding("data", f"LSB 提取: {label}", preview(blob, 600), blob))
     skip = chunk_ranges(data, "IDAT") if info.ext == "png" else []
     for off, dec in zlib_streams(data[: 2 * 1024 * 1024], skip_ranges=skip):

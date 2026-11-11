@@ -155,8 +155,12 @@ def crack_password(data: bytes, extra: list[str] | None = None, digits: int = 0,
 
     for pw in candidates[:limit]:
         try:
-            with zf.open(target.filename, pwd=pw.encode("utf-8", "ignore")):
-                return pw
+            # 必须真正读完并校验 CRC：ZipCrypto 的 12 字节头有 1/256 的
+            # 误判概率，只 open 不 read 会返回错误口令（题库实测踩过）
+            with zf.open(target.filename, pwd=pw.encode("utf-8", "ignore")) as fh:
+                while fh.read(1 << 20):
+                    pass
+            return pw
         except Exception:
             continue
     return None

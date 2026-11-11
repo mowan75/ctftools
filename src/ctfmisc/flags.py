@@ -7,11 +7,20 @@ from dataclasses import dataclass, field
 
 # 常见 flag 前缀（命中即高分）
 KNOWN_PREFIX = {
-    "flag", "fl4g", "ctf", "key", "answer", "secret", "dasctf", "nssctf", "hgame",
-    "moectf", "buuctf", "buu", "n1ctf", "qwb", "swpuctf", "gactf", "sctf", "xctf",
-    "hitctf", "hctf", "actf", "ctfshow", "hdctf", "ezctf", "geek", "geekchallenge",
-    "iscc", "ciscn", "d0g3", "de1ctf", "starctf", "0ctf", "wpctf", "deconstest",
-    "flag1", "flag2", "flag3", "e", "sctf2023",
+    "flag", "fl4g", "ctf", "key", "answer", "secret", "test", "demo",
+    # 国内赛事
+    "dasctf", "nssctf", "hgame", "moectf", "buuctf", "buu", "n1ctf", "qwb",
+    "swpuctf", "gactf", "sctf", "xctf", "hitctf", "hctf", "actf", "ctfshow",
+    "hdctf", "ezctf", "iscc", "ciscn", "d0g3", "de1ctf", "starctf", "0ctf",
+    "wpctf", "geek", "geekchallenge", "flag1", "flag2", "flag3", "sctf2023",
+    # 国际赛事（题库里出现过的格式）
+    "apoorvctf", "breach", "cssctf", "crew", "crewctf", "gaslightctf", "btctf",
+    "bh", "boro", "boroctf", "bushbash", "codevinci", "cube", "diver24",
+    "dvctf", "dawgctf", "dsc", "ictf", "kctf", "lactf", "uiuctf", "tjctf",
+    "utctf", "umdctf", "tamuctf", "corctf", "dice", "hxp", "justctf", "l3ak",
+    "sekaictf", "sekai", "wctf", "zh3r0", "picoctf", "pico", "htb", "thm",
+    "inctf", "nite", "angstorm", "bi0s", "kqctf", "wtfctf", "m0lecon",
+    "intigriti", "tryhackme", "hackthebox", "cyberdefenders", "ncl",
 }
 
 BRACED = re.compile(r"[A-Za-z0-9_\u4e00-\u9fff]{1,24}\{[^{}\s\r\n]{1,150}\}")
@@ -48,6 +57,31 @@ def _looks_like_json_or_code(body: str) -> bool:
 _SAFE_BODY = re.compile(r"^[A-Za-z0-9_\-\s!@#$%^&*()+={}:;.,?/|~\[\]<>]{2,150}$")
 
 
+def _randomish(body: str) -> bool:
+    """判断花括号内容是否像 base64/随机字节噪声（未知前缀时用于过滤误报）。
+
+    例：iEaDtHTlXeuYymeY、g|qipzft~azu 这类混合大小写、无分隔、元音稀少的串，
+    基本是解码随机数据时碰巧凑出来的，不应该当成 flag。
+    """
+    s = body.strip()
+    if len(s) < 10:
+        return False
+    if re.search(r"[_\-\s.@#$%^&*+=]", s):
+        return False
+    letters = [c for c in s if c.isalpha()]
+    if not letters:
+        return False
+    digits = sum(c.isdigit() for c in s)
+    upper = sum(c.isupper() for c in letters)
+    lower = len(letters) - upper
+    if digits == 0 and min(upper, lower) / len(letters) > 0.2:
+        return True
+    vowels = sum(c.lower() in "aeiou" for c in letters)
+    if len(letters) >= 12 and vowels / len(letters) < 0.2:
+        return True
+    return False
+
+
 def _plausible(whole: str, prefix: str, body: str) -> bool:
     """过滤随机字节解码出来的伪 flag。"""
     for ch in whole:
@@ -64,6 +98,14 @@ def _plausible(whole: str, prefix: str, body: str) -> bool:
         return False
     # 不含空格、无怪异符号、长度够
     if " " in body or not _SAFE_BODY.match(body):
+        return False
+    # 未知前缀只认“像口令/单词”的内容：允许字母数字与 _ - .，
+    # 其他符号（| ~ = + 等）几乎只出现在随机解码噪声里
+    if not re.fullmatch(r"[A-Za-z0-9_.\-]{2,150}", body):
+        return False
+    if not re.search(r"[0-9_\-]", body) and len(body) < 8:
+        return False
+    if _randomish(body):
         return False
     return len(body) >= 4
 
@@ -100,7 +142,11 @@ def find_flags(text: str, source: str = "", extra_patterns: list[str] | None = N
             continue
         start = max(0, m.start() - 30)
         ctx = text[start:m.end() + 30].replace("\n", " ")
-        add(whole, 30 + _prefix_bonus(prefix) + min(len(body), 40) / 4, ctx, "形如 prefix{...}")
+        bonus = _prefix_bonus(prefix)
+        score = 30 + bonus + min(len(body), 40) / 4
+        if not bonus:
+            score = min(score, 45.0)   # 未知前缀：保留但不上榜，压低解码噪声
+        add(whole, score, ctx, "形如 prefix{...}")
 
     for m in PHRASE.finditer(text):
         start = max(0, m.start() - 30)

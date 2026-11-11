@@ -10,12 +10,43 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable
 
-from . import (archive, audio, binary, carve, codec, docs, filetypes, forensic, image, jpegdct,
-               misc, ocr, pcap, textstego)
+from . import (archive, audio, binary, carve, codec, corpusinfo, docs, filetypes, forensic,
+               image, jpegdct, misc, ocr, pcap, textstego)
 from .flags import FlagHit, find_flags, merge
 
 MAX_READ = 64 * 1024 * 1024
 _CIPHER_CHARSET = re.compile(r"^[A-Za-z0-9+/=_\-.\s%|]{8,}$")
+_CONTAINER_MAGICS = (b"PK\x03\x04", b"PK\x05\x06", b"\x1f\x8b", b"BZh", b"7z\xbc\xaf",
+                     b"\xfd7zXZ", b"Rar!", b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff", b"GIF8")
+
+
+def _is_container(blob: bytes) -> bool:
+    return bool(blob) and blob.startswith(_CONTAINER_MAGICS)
+
+
+_COMMON_WORDS = {"the", "and", "is", "of", "to", "you", "this", "that", "with",
+                 "for", "are", "it", "in", "on", "a", "an", "be", "as", "at", "by"}
+
+
+def _looks_natural(text: str) -> bool:
+    """正常英文散文（题面/README）：不需要再跑 ROT/凯撒/多层暴力。"""
+    s = text.strip()
+    words = re.findall(r"[A-Za-z]{2,}", s)
+    # 短句但明显是自然语言（例如 "created by xx, barely hidden tbh.."）
+    if len(words) >= 4 and s.count(" ") >= 3:
+        return True
+    if len(s) < 60 or s.count(" ") < 8 or len(words) < 12:
+        return False
+    common = sum(1 for w in words if w.lower() in _COMMON_WORDS)
+    return common >= 3
+
+
+def _readable(s: str) -> bool:
+    head = s[:400]
+    if not head:
+        return False
+    good = sum(1 for ch in head if ch.isprintable() or ch in "\n\r\t")
+    return good / len(head) >= 0.9
 
 
 def _looks_like_cipher(text: str) -> bool:
@@ -63,6 +94,7 @@ class Options:
     time_budget: float = 150.0
     decode_budget: float = 25.0
     zip_digits: int = 4
+    max_item_seconds: float = 12.0
     extra_patterns: list[str] = field(default_factory=list)
     read_cap: int = MAX_READ
 
@@ -77,6 +109,7 @@ class Report:
     items: dict[str, Item] = field(default_factory=dict)
     flag_item: dict[str, str] = field(default_factory=dict)
     outdir: str = ""
+    meta: dict | None = None
 
     def text_flags(self) -> list[str]:
         return [f.value for f in self.flags if f.score >= 50]
@@ -138,11 +171,50 @@ class Pipeline:
         self.flag_item: dict[str, str] = {}
         self.outdir: str = ""
         self.root_paths: list[str] = []
+        self.meta: dict | None = None
+        self._secrets: set[str] = set()
+        self._finding_keys: set[tuple[str, str]] = set()
 
     # ------------------------------------------------------------------ #
     def _say(self, msg: str) -> None:
         self.report.log.append(msg)
         self.progress(msg)
+
+    def _remaining(self) -> float:
+        return self.deadline - time.time()
+
+    def _collect_secrets(self, data: bytes, label: str = "") -> None:
+        """收集“可能是口令”的字符串：可打印片段与文件（名）主干。
+
+        题库里常见套路是“图片尾部写着口令，紧跟一个加密 zip”，把这些串喂给
+        口令爆破，往往比字典更有效。
+        """
+        if len(self._secrets) >= 400:
+            return
+        # 口令常写在文件尾部（“xxx\nPK...”），尾部优先扫；大文件只取头尾窗口
+        windows = [data[-400_000:], data[:200_000]] if len(data) > 400_000 else [data]
+        cands: list[str] = []
+        for w in windows:
+            try:
+                text = w.decode("latin-1", "ignore")
+            except Exception:
+                continue
+            for m in re.finditer(r"[ -~]{4,64}", text):
+                s = m.group(0).strip()
+                if 4 <= len(s) <= 64 and re.search(r"[A-Za-z]", s):
+                    cands.append(s)
+        # “像密码”的串优先：字母+数字混排、长度 6~40；纯英文句子往后排
+        def rank(s: str) -> tuple:
+            has_digit = any(c.isdigit() for c in s)
+            has_alpha = any(c.isalpha() for c in s)
+            return (0 if (has_digit and has_alpha) else 1,
+                    0 if 6 <= len(s) <= 40 else 1,
+                    1 if " " in s else 0)
+        for s in sorted(cands, key=rank)[:400]:
+            self._secrets.add(s)
+        stem = os.path.splitext(os.path.basename(label.split("::")[-1]))[0]
+        if 3 <= len(stem) <= 64:
+            self._secrets.add(stem)
 
     def _add_flags(self, data: bytes, source: str, item_label: str = "") -> None:
         try:
@@ -154,12 +226,19 @@ class Pipeline:
             if prefix in self.expected_prefixes:
                 hit.score += 60
                 hit.reason += "（与题面中出现的格式一致）"
+            if os.path.basename(source).lower().startswith("readme"):
+                # README 里出现的“flag”经常是题面示例，不能当成完全可信的结果
+                hit.score = min(hit.score, 55.0)
+                hit.reason += "（来自 README 题面，可能是示例）"
             self.report.flags.append(hit)
             if item_label:
                 self.flag_item.setdefault(hit.value, item_label)
 
     def _scan_expected_prefixes(self, queue: list[Item]) -> None:
         """从题面等文本里提取 “xxx{” 形状的前缀，用于给候选 flag 加权。"""
+        pref = corpusinfo.format_prefix(self.meta)
+        if pref:
+            self.expected_prefixes.add(pref)
         pat = re.compile(r"\b([A-Za-z][A-Za-z0-9_]{1,19})\{")
         for item in queue[:24]:
             if len(item.data) > 200000:
@@ -174,6 +253,7 @@ class Pipeline:
             head = text[:400]
             if not head or sum(1 for c in head if c.isprintable()) / len(head) < 0.9:
                 continue
+            self._collect_secrets(item.data, item.label)
             for m in pat.finditer(text):
                 self.expected_prefixes.add(m.group(1).lower())
             low = text.lower()
@@ -181,6 +261,10 @@ class Pipeline:
                 self.expected_prefixes.add(m.group(1))
 
     def _finding(self, source: str, title: str, detail: str = "", kind: str = "info", data: bytes = b"") -> None:
+        key = (source, title, (detail or "")[:60])
+        if key in self._finding_keys:
+            return
+        self._finding_keys.add(key)
         # 发现里带图片数据时，自动落盘并告知路径（用户最常问“生成的图在哪”）
         if data and len(data) > 256 and data[:8] in (b"\x89PNG\r\n\x1a\n",) or (data[:3] == b"\xff\xd8\xff" and len(data) > 256):
             path = self._save_blob(title, data)
@@ -189,6 +273,12 @@ class Pipeline:
         self.report.findings.append(Finding(source, title, detail, kind, data))
 
     def _artifact_dir(self) -> str:
+        if not self.outdir and self.meta:
+            # 题库题目：产物写到临时目录，别把 corpus 弄脏
+            import tempfile
+            safe = re.sub(r'[<>:"/\\|?*\s]+', "_", self.meta.get("name") or "challenge")[:40]
+            self.outdir = os.path.join(tempfile.gettempdir(), "CTF-Misc-Tool-分析结果", safe)
+            return self.outdir
         if not self.outdir:
             base = self.root_paths[0] if self.root_paths else os.getcwd()
             base = os.path.abspath(base)
@@ -242,6 +332,17 @@ class Pipeline:
     # ------------------------------------------------------------------ #
     def run_paths(self, paths: list[str]) -> Report:
         self.root_paths = list(paths)
+        # 题库题面：把 flag 格式 / 提示带进分析，既用于加权也展示给用户
+        self.meta = corpusinfo.detect(paths)
+        if self.meta:
+            desc = corpusinfo.description(self.meta)
+            fmt = (self.meta.get("known_flag") or "").strip()
+            detail = desc + (f"\n\nflag 格式：{fmt}" if fmt else "")
+            self._finding("题库", f"题面：{self.meta.get('name', '')}", detail, "info")
+            pref = corpusinfo.format_prefix(self.meta)
+            if pref:
+                self.expected_prefixes.add(pref)
+            self._collect_secrets(detail.encode("utf-8", "ignore"), "题面")
         # 文件名提示（base64/关键字）：很多题的钥匙就在文件名里
         for p in paths:
             for tag, msg in forensic.filename_hints(p):
@@ -318,10 +419,17 @@ class Pipeline:
             self._seen.add(key)
             derived = self._analyze(item)
             for child in derived:
-                if child.depth <= self.opt.max_depth and len(pending) < 400:
+                if child.depth > self.opt.max_depth or len(pending) >= 400:
+                    continue
+                if _is_container(child.data):
+                    # 压缩包 / 图片等容器优先处理：答案往往就在里面，
+                    # 不能让大图的 LSB/OCR 把时间预算吃光
+                    pending.insert(0, child)
+                else:
                     pending.append(child)
             self.report.artifacts.extend((f"{item.label} :: {d.label}", d.data) for d in derived[:12])
         self.report.flags = merge(self.report.flags)
+        self.report.meta = self.meta
         self.report.items = {label: item for label, item in self._items.items()}
         self.report.flag_item = dict(self.flag_item)
         self.report.outdir = self.outdir
@@ -340,7 +448,13 @@ class Pipeline:
     def _analyze(self, item: Item) -> list[Item]:
         data = item.data
         self._items[item.label] = item
+        self._collect_secrets(data, item.label)
         prefix = "  " * item.depth
+        if self._remaining() < 0.2:
+            self._say(f"{prefix}→ {item.label}  [跳过：已达到时间上限]")
+            return []
+        self._item_deadline = time.time() + min(self.opt.max_item_seconds,
+                                                max(1.0, self._remaining()))
         info = filetypes.identify(data, item.label)
         self._say(f"{prefix}→ {item.label}  [{info.desc} / {len(data)} 字节]")
         derived: list[Item] = []
@@ -354,6 +468,21 @@ class Pipeline:
                 "png", "jpg", "gif", "bmp", "zip", "gz", "wav", "mp3", "pdf", "pcap")):
             self._finding(item.label, "文件头与扩展名不一致",
                           f"扩展名 .{ext_name}，实际为 {info.desc}", "warn")
+
+        # 先做便宜且高价值的结构检查：尾部附加数据 / 内嵌文件。
+        # 很多题的答案在“图片尾部跟一个压缩包”里，先派生出这些条目，
+        # 比把时间花在整张图的 LSB/OCR 上更划算。
+        trailing = filetypes.trailing_data(data, info.ext)
+        if trailing and len(trailing) > 16:
+            self._collect_secrets(trailing, "文件尾")
+            derived.append(Item(f"{item.label}::文件尾附加数据", trailing, item.depth + 1, item.label,
+                                step=f"取文件尾附加数据（{len(trailing)} 字节）"))
+        if len(data) < 16 * 1024 * 1024 and self._remaining() > 1:
+            for hit in carve.carve(data):
+                self._say(f"{prefix}  发现内嵌 {hit.desc} @{hit.offset} ({hit.size} 字节)")
+                derived.append(Item(f"{item.label}::内嵌{hit.ext}@{hit.offset}", hit.data,
+                                    item.depth + 1, item.label,
+                                    step=f"雕出内嵌文件 {hit.desc}（偏移 {hit.offset}）"))
 
         # 文本类
         text = None
@@ -388,12 +517,31 @@ class Pipeline:
 
         # 图片
         if info.ext in ("png", "jpg", "jpeg", "gif", "bmp", "webp", "tif", "tiff"):
-            for f in image.analyze(data, deep_lsb=True):
+            deep = self._remaining() > 3 and self._item_deadline - time.time() > 2
+            for f in image.analyze(data, deep_lsb=deep):
                 self._finding(item.label, f.title, f.detail, f.kind, f.data)
                 if f.data:
                     self._add_flags(f.data, f"{item.label} / {f.title}", f"{item.label}::{f.title}")
                     derived.append(Item(f"{item.label}::{f.title}", f.data, item.depth + 1, item.label,
                                         step=f"图片分析命中：{f.title}"))
+            # “白底白字”：把极微弱色差放大后再 OCR（题库里很常见）
+            try:
+                lowc = image.low_contrast_variants(data)
+            except Exception:
+                lowc = []
+            for tag, blob in lowc[:2]:
+                self._finding(item.label, f"低对比度色差增强：{tag}",
+                              "已把极微弱颜色差异放大（常见于白底白字题），见生成图片", "image", blob)
+                if ocr.available() and self._remaining() > 2:
+                    texts, fl = ocr.ocr_flags(blob)
+                    if texts:
+                        self._finding(item.label, f"增强后 OCR（{tag}）",
+                                      " / ".join(texts[:4])[:400], "data")
+                    for v in fl:
+                        self.report.flags.append(
+                            FlagHit(v, f"{item.label} / 色差增强OCR", 130.0, "", "色差增强+OCR 命中"))
+                        self.flag_item.setdefault(v, f"{item.label} / 色差增强OCR")
+
             for text_val in misc.qr_decode(data):
                 self._say(f"{prefix}  二维码内容: {text_val}")
                 self._finding(item.label, "二维码识别", text_val, "data", text_val.encode())
@@ -423,7 +571,7 @@ class Pipeline:
                         if sheet:
                             derived.append(Item(f"{item.label}::宽高候选对照图", sheet, item.depth + 1,
                                                 item.label, step="枚举 PNG 合法宽高并生成候选对照图"))
-            if info.ext == "gif":
+            if info.ext == "gif" and self._remaining() > 1:
                 frames = image.gif_frames(data, limit=60)
                 if len(frames) > 1:
                     self._finding(item.label, f"GIF 共 {len(frames)} 帧",
@@ -443,7 +591,7 @@ class Pipeline:
             if info.ext in ("jpg", "jpeg"):
                 self._finding(item.label, "F5 隐写检测", jpegdct.f5_detect(data), "info")
             # OCR：很多题的 flag 就是图里写的一行字
-            if ocr.available():
+            if ocr.available() and self._remaining() > 2 and self._item_deadline - time.time() > 3:
                 texts, ocr_flags = ocr.ocr_flags(data)
                 if texts:
                     self._finding(item.label, "图片文字识别(OCR)", " / ".join(texts[:6])[:600], "data")
@@ -472,7 +620,8 @@ class Pipeline:
         if info.ext == "zip":
             try:
                 entries, _c = archive.zip_entries(data)
-                if entries and all(e.encrypted for e in entries):
+                # CRC 爆破只对“几十字节的小条目”有意义；大条目会白烧上百万次尝试
+                if entries and all(e.encrypted for e in entries) and all(e.size <= 128 for e in entries):
                     content, note = archive.crc_bruteforce(data)
                     self._finding(item.label, "ZIP 短内容 CRC 爆破", note,
                                   "data" if content else "info", content or b"")
@@ -510,14 +659,15 @@ class Pipeline:
             for it in items:
                 if it.warn:
                     self._add_flags(it.value.encode("utf-8", "ignore"), f"{item.label} / {it.label}")
-        if item.label.lower().endswith((".pyc", ".pyo")) or binary.pyc_version(data).startswith("3."):
+        if (item.label.lower().endswith((".pyc", ".pyo")) or binary.pyc_version(data).startswith("3.")) \
+                and self._remaining() > 1:
             if item.label.lower().endswith((".pyc", ".pyo")):
                 dis = binary.pyc_disassemble(data, max_lines=60)
                 self._finding(item.label, "Python 字节码反汇编", dis[:2000])
                 for s in binary.pyc_suspicious_strings(data):
                     self._finding(item.label, "可疑字符串", s, "data", s.encode())
                     self._add_flags(s.encode(), f"{item.label} / 字节码字符串")
-        if binary.has_pyinstaller(data):
+        if binary.has_pyinstaller(data) and self._remaining() > 2:
             try:
                 files, note = binary.pyinstaller_extract(data, max_files=120)
                 self._finding(item.label, "PyInstaller 归档", note)
@@ -556,17 +706,6 @@ class Pipeline:
         if ad1:
             self._finding(item.label, "AD1 / 镜像线索", ad1, "info")
 
-        # 附加数据 / 内嵌文件
-        trailing = filetypes.trailing_data(data, info.ext)
-        if trailing and len(trailing) > 16:
-            derived.append(Item(f"{item.label}::文件尾附加数据", trailing, item.depth + 1, item.label,
-                                step=f"取文件尾附加数据（{len(trailing)} 字节）"))
-        if len(data) < 16 * 1024 * 1024:
-            for hit in carve.carve(data):
-                self._say(f"{prefix}  发现内嵌 {hit.desc} @{hit.offset} ({hit.size} 字节)")
-                derived.append(Item(f"{item.label}::内嵌{hit.ext}@{hit.offset}", hit.data,
-                                    item.depth + 1, item.label,
-                                    step=f"雕出内嵌文件 {hit.desc}（偏移 {hit.offset}）"))
         return derived
 
     # ------------------------------------------------------------------ #
@@ -585,20 +724,36 @@ class Pipeline:
             return derived
         results = codec.manual_decode(stripped)
         kept = 0
-        for name, value, score in results[:16]:
+        noise = 0
+        natural = _looks_natural(stripped)
+        for name, value, score in results[:18]:
             if score < 10:
                 continue
-            self._finding(item.label, f"单层解码: {name}", value[:1200], "data",
-                          value.encode("utf-8", "ignore"))
-            self._add_flags(value.encode("utf-8", "ignore"), f"{item.label} / {name}",
-                            f"{item.label}::{name}")
             spec = codec.is_speculative(name)
-            if (kept < 4 and item.depth < self.opt.max_depth and len(value) < 20000
-                    and (not spec or score >= 30)):
-                derived.append(Item(f"{item.label}::{name}", value.encode("utf-8", "ignore"),
+            if spec and natural:
+                noise += 1
+                continue
+            blob = value.encode("utf-8", "ignore")
+            hit = bool(find_flags(value, extra_patterns=self.opt.extra_patterns))
+            # 猜测型变换（ROT/凯撒/栅栏/替换…）几乎对任何文本都能“变出东西”，
+            # 没命中 flag 就只计数、不展示，更不能继续派生（否则指数级刷屏）
+            if spec and not hit:
+                noise += 1
+                continue
+            if not hit and not _readable(value):
+                noise += 1
+                continue
+            self._finding(item.label, f"单层解码: {name}", value[:1200], "data", blob)
+            self._add_flags(blob, f"{item.label} / {name}", f"{item.label}::{name}")
+            if kept < 4 and item.depth < self.opt.max_depth and len(value) < 20000 and not spec:
+                derived.append(Item(f"{item.label}::{name}", blob,
                                     item.depth + 1, item.label, step=f"编码/密码变换：{name}"))
                 kept += 1
-        if self.opt.deep and 6 <= len(stripped) <= 4000 and _looks_like_cipher(stripped):
+        if noise:
+            self._finding(item.label, "编码尝试（无命中）",
+                          f"另试了 {noise} 种猜测型编码/古典密码，未出现 flag 或可读文本", "info")
+        if (self.opt.deep and 6 <= len(stripped) <= 4000 and not natural
+                and _looks_like_cipher(stripped)):
             budget = min(self.opt.decode_budget, max(3.0, self.deadline - time.time()))
             if budget > 1:
                 self._say(f"{prefix}  多层自动解码中（最多 {budget:.0f} 秒）…")
@@ -628,7 +783,11 @@ class Pipeline:
                 names = "\n".join(f"{e.name}  ({e.size} 字节{'，加密' if e.encrypted else ''})" for e in entries[:40])
                 self._finding(item.label, f"ZIP 文件列表（{len(entries)} 项）", names)
                 for name in archive.interesting_names([e.name for e in entries]):
-                    self.report.flags.append(FlagHit(name, f"{item.label} / 文件名", 60.0, "", "可疑文件名"))
+                    self._finding(item.label, "可疑文件名", name, "info")
+                    # 只有名字本身就是 flag 形状才算候选，`flag.png` 这种不能算
+                    if re.search(r"[A-Za-z0-9_]{2,24}\{[^}]{2,}\}", name):
+                        self.report.flags.append(
+                            FlagHit(name, f"{item.label} / 文件名", 60.0, "", "可疑文件名"))
                 if any(e.encrypted for e in entries):
                     if archive.pseudo_encrypted(data):
                         fixed = archive.fix_pseudo_encryption(data)
@@ -638,9 +797,9 @@ class Pipeline:
                     else:
                         self._say(f"{prefix}  ZIP 已加密，先试「文件名当密码」再试常见口令…")
                         outer = item.label.split("::")[-1]
-                        pw = archive.crack_password(
-                            data, extra=archive.name_passwords(data, outer) + self.opt.extra_patterns,
-                            limit=5000)
+                        candidates = (archive.name_passwords(data, outer)
+                                      + sorted(self._secrets) + self.opt.extra_patterns)
+                        pw = archive.crack_password(data, extra=candidates, limit=20000)
                         if pw is None:
                             pw = archive.crack_password(data, digits=self.opt.zip_digits)
                         if pw is not None:
