@@ -84,7 +84,7 @@ git clone --depth 1 --filter=blob:none --no-checkout https://github.com/sajjadiu
       --max-challenges 200 --max-mb 55 --per-file-mb 2.5 --ctf-limit 5
 ```
 
-脚本会优先使用本地 git 对象库（零流量），否则走 jsDelivr / ghproxy 通道；
+脚本会优先使用本地 git 对象库，否则走 jsDelivr / ghproxy 通道；
 下载过的文件会缓存在 `work/corpus/blob-cache/`，重跑不会重复下载。
 
 ## 已知边界
