@@ -749,7 +749,7 @@ def ec_composite_solve(n: int, a: int, b: int, x0: int, y0: int,
                        q: int | None = None) -> tuple[bytes, int, int] | None:
     """解“RSA 模数上的椭圆曲线”加密：分解 n → 用 CRT 算每轮倍点 → 异或还原明文。
 
-    加密（见 WZBC 2025 Crypto-Curve）：
+    加密方式：
         G = G + G;  c += [G.x ^ block, G.y ^ block]
     """
     if not (p and q):

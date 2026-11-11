@@ -969,7 +969,7 @@ class Actions:
             lines += [f"★ {t}：{m}" for t, m in hints]
         else:
             lines.append("文件名里没有明显的 base64/hex/关键字提示")
-        # 顺带给出键盘错位变体（DeepSleep 那道题就是 shift 变密码）
+        # 顺带给出键盘错位变体（常见套路：数字按 Shift 变成符号当密码）
         for cand in ["12345678", "qwerty", "1qaz2wsx"]:
             lines.append(f"\n键盘 Shift 变体（{cand}）→ " + ", ".join(forensic.keyboard_shift_variants(cand)))
         self._out("文件名提示 / 键盘错位", "\n".join(lines))
@@ -1287,17 +1287,17 @@ class Actions:
         self._out("Web 常见 payload 速查表", web.WEB_CHEATSHEET)
 
     # ------------------------------------------------------------------ #
-    # ★ 校赛真题（WZBC 2025）专用卡片：方法 + 自动工具
+    # ★ 经典题型解法手册：方法 + 自动工具（与具体赛事无关）
     # ------------------------------------------------------------------ #
-    def act_wzbc_handbook(self) -> None:
-        lines = ["# WZBC & CTF 2025 校赛题型解法手册", "",
-                 "本手册把校赛每类题的解法固化下来，配合左边的工具卡片使用。", ""]
-        for name, body in docs.WZBC_2025.items():
+    def act_technique_handbook(self) -> None:
+        lines = ["# 经典题型解法手册", "",
+                 "把常见题型的解法整理成速查条目，配合左边的工具卡片使用。", ""]
+        for name, body in docs.TECHNIQUES.items():
             lines += [f"## {name}", "", body, ""]
-        self._out("校赛题型解法手册（WZBC 2025）", "\n".join(lines))
+        self._out("经典题型解法手册", "\n".join(lines))
 
     def act_js_audit_online(self) -> None:
-        self._ask_url("前端 JS 抓取审计（babyWeb 那类）", lambda url: self._run_web(
+        self._ask_url("前端 JS 抓取审计（flag 硬编码在前端那种）", lambda url: self._run_web(
             lambda: web.crawl_and_audit_js(url, on_progress=self.app.log),
             lambda r: self._out(f"前端 JS 审计：{url}", "\n".join(r[0]), flags=r[1]),
             busy="抓取并审计 JS…"))
@@ -1310,7 +1310,7 @@ class Actions:
             text = self._file_text(self._read(path))
             lines += docs.pyjail_assist(text) + [""]
         lines += docs.PYJAIL_PAYLOADS.splitlines()
-        self._out("Python 沙箱逃逸（ezPy 那类）", "\n".join(lines))
+        self._out("Python 沙箱逃逸（黑名单过滤型）", "\n".join(lines))
 
     def act_ecc_composite(self) -> None:
         def submit(v):
@@ -1363,7 +1363,7 @@ class Actions:
             lines.append("    结果：" + value[:300])
             flags += [h.value for h in find_flags(value)]
             lines.append("")
-        self._out("Base 家族连环解码（We are Family 那类）", "\n".join(lines),
+        self._out("Base 家族连环解码", "\n".join(lines),
                   flags=sorted(set(flags)))
 
     def act_gif_frames(self) -> None:
@@ -1855,41 +1855,41 @@ def build_sections(app):
     """返回三级卡片清单：[(大类, 提示, [(小类, 提示, [(标题, 说明, 回调, 徽标?), ...]), ...]), ...]"""
     A = Actions(app)
     return [
-        ("★ 校赛真题（温商院 2025）", "每题一个卡片：方法 + 一键工具", [
-            ("先看手册", "把校赛每类题的解法读一遍（含 WriteUp 原文要点）", [
-                ("校赛题型解法手册", "9 道题（Web/Misc/Crypto/Reverse）的解法要点全在这",
-                 A.act_wzbc_handbook, "先看这个"),
+        ("★ 经典题型速查", "按题型查解法：方法 + 一键工具", [
+            ("速查手册", "常见题型的解法要点，先扫一遍", [
+                ("经典题型解法手册", "Web / Misc / Crypto / Reverse 高频解法要点全在这",
+                 A.act_technique_handbook, "先看这个"),
             ]),
-            ("Web", "babyWeb / ezPy / babyGo", [
-                ("前端 JS 抓取审计", "babyWeb：自动抓页面所有 JS 并搜 flag（flag 常硬编码在前端）",
-                 A.act_js_audit_online, "校赛 300 分"),
-                ("Python 沙箱逃逸 payload", "ezPy：按源码黑名单给绕过思路 + 现成 payload",
-                 A.act_pyjail_payloads, "校赛 1000 分"),
-                ("JWT 伪造（none/重签）", "babyGo：伪造 is_admin 的 token", A.act_jwt_forge),
-                ("SSTI 模板注入", "babyGo：已加入 Go 模板探针 {{ . }} / {{ len \"abcd\" }}",
+            ("Web", "前端源码 / 沙箱逃逸 / 模板注入", [
+                ("前端 JS 抓取审计", "自动抓页面所有 JS 并搜 flag（flag 常硬编码在前端）",
+                 A.act_js_audit_online, "高频"),
+                ("Python 沙箱逃逸 payload", "按源码黑名单给绕过思路 + 现成 payload",
+                 A.act_pyjail_payloads, "高频"),
+                ("JWT 伪造（none/重签）", "伪造 is_admin 之类的 token", A.act_jwt_forge),
+                ("SSTI 模板注入", "已加入 Go 模板探针 {{ . }} / {{ len \"abcd\" }}",
                  A.act_web_ssti),
             ]),
-            ("Misc", "CompressionLab / DeepSleep / Who's Cat", [
-                ("ZIP 口令 = 文件名", "CompressionLab：真加密的密码就是压缩包自己的名字",
-                 A.act_name_password, "校赛 500 分"),
-                ("文件时间戳隐写", "DeepSleep：一堆同大小文件用修改时间编码二进制",
-                 A.act_timestamp_stego, "校赛 500 分"),
-                ("文件名提示 / 键盘错位", "DeepSleep：文件名 base64 提示 + 12345678→!@#$%^&*",
-                 A.act_filename_hints, "校赛 500 分"),
-                ("猫脸变换还原", "Who's Cat：长方形先拉正方形，再枚举逆变换",
-                 A.act_arnold, "校赛 Normal"),
-                ("压缩包解包 / 伪加密", "CompressionLab 的另一半：伪加密修复 + 嵌套递归",
+            ("Misc", "压缩包 / 元数据 / 图像变换", [
+                ("ZIP 口令 = 文件名", "真加密的密码就是压缩包自己的名字",
+                 A.act_name_password, "高频"),
+                ("文件时间戳隐写", "一堆同大小文件用修改时间编码二进制",
+                 A.act_timestamp_stego, "高频"),
+                ("文件名提示 / 键盘错位", "文件名 base64 提示 + 12345678→!@#$%^&*",
+                 A.act_filename_hints),
+                ("猫脸变换还原", "长方形先拉正方形，再枚举逆变换",
+                 A.act_arnold, "高频"),
+                ("压缩包解包 / 伪加密", "伪加密修复 + 嵌套递归",
                  A.act_zip_unpack),
             ]),
-            ("Crypto", "Curve / We are Family!", [
-                ("椭圆曲线（复合模数）求解", "Curve：用“分母不可逆”gcd 分解 n，再 CRT 还原明文",
-                 A.act_ecc_composite, "校赛 1000 分"),
-                ("Base 家族连环解码", "We are Family!：base36→100→16→85→64→91→58→62→32 自动串",
-                 A.act_base_family, "校赛 300 分"),
+            ("Crypto", "椭圆曲线 / Base 家族", [
+                ("椭圆曲线（复合模数）求解", "用“分母不可逆”gcd 分解 n，再 CRT 还原明文",
+                 A.act_ecc_composite, "进阶"),
+                ("Base 家族连环解码", "base36→100→16→85→64→91→58→62→32 自动串",
+                 A.act_base_family, "高频"),
             ]),
-            ("Reverse", "reMe", [
-                ("二进制信息卡", "reMe：先看位数/保护/节表", A.act_bincard),
-                ("strings 提取", "reMe：找提示与假 flag", A.act_strings),
+            ("Reverse", "基础逆向套路", [
+                ("二进制信息卡", "先看位数/保护/节表", A.act_bincard),
+                ("strings 提取", "找提示与假 flag", A.act_strings),
                 ("Python .pyc 反汇编", "Python 逆向题直接反汇编", A.act_pyc),
             ]),
         ]),
@@ -1937,15 +1937,15 @@ def build_sections(app):
                 ("ZIP 伪加密修复", "标志位造假导致“要密码”，一键修复", A.act_zip_pseudo, "经典"),
                 ("ZIP 短内容 CRC 爆破", "已知 CRC 反推很短的条目内容（数字/1-2 字节）", A.act_zip_crc, "高频"),
                 ("压缩包口令爆破", "内置字典 + 0000-999999", A.act_zip_crack),
-                ("ZIP 口令 = 文件名", "嵌套压缩包题：真加密的密码往往是压缩包/条目自己的名字", A.act_name_password, "校赛真题"),
+                ("ZIP 口令 = 文件名", "嵌套压缩包题：真加密的密码往往是压缩包/条目自己的名字", A.act_name_password, "经典"),
                 ("注释 / 文件名 / CRC", "注释、文件名编码、CRC 逐个查", A.act_zip_info),
             ]),
             ("流量与取证", "pcap 与文件本身藏东西", [
                 ("流量包分析", "TCP 流重组、HTTP 对象还原、DNS 查询、USB 键盘击键", A.act_pcap, "高频"),
                 ("USB 鼠标轨迹还原", "把鼠标流量画成图（常见“画二维码”）", A.act_usb_mouse),
                 ("内存镜像快速分析", "识别镜像类型 + strings + flag 扫描（Volatility 前置）", A.act_memory, "取证"),
-                ("文件时间戳隐写", "同目录大量同大小文件，用修改时间编码二进制（校赛真题）", A.act_timestamp_stego, "校赛真题"),
-                ("文件名提示 / 键盘错位", "文件名里的 base64 提示、Shift 变换当密码（校赛真题）", A.act_filename_hints, "校赛真题"),
+                ("文件时间戳隐写", "同目录大量同大小文件，用修改时间编码二进制", A.act_timestamp_stego, "取证"),
+                ("文件名提示 / 键盘错位", "文件名里的 base64 提示、Shift 变换当密码", A.act_filename_hints, "取证"),
                 ("文件类型 / 头尾分析", "真实类型、扩展名不符、尾部附加数据", A.act_filetype, "高频"),
                 ("内嵌文件雕复", "binwalk 精简版，带格式校验不会误报", A.act_carve),
                 ("strings 提取", "提取可打印字符串并自动找 flag", A.act_strings),

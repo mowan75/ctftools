@@ -561,7 +561,7 @@ SSTI_PAYLOADS = [
 
 def crawl_and_audit_js(base_url: str, timeout: float = 10.0,
                        max_js: int = 12, on_progress=None) -> tuple[list[str], list[str]]:
-    """抓首页 → 找出所有 JS → 逐个下载审计（babyWeb 那类“flag 在前端 JS 里”）。"""
+    """抓首页 → 找出所有 JS → 逐个下载审计（常见“flag 硬编码在前端 JS 里”）。"""
     from .flags import find_flags
     lines: list[str] = []
     flags: list[str] = []

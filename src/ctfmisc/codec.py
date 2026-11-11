@@ -363,7 +363,7 @@ BASE_FAMILY = [
 
 
 def base_family_chain(text: str, max_depth: int = 8) -> list[tuple[list[str], str]]:
-    """Base 家族连环解码（“We are Family”那类题）：每轮把所有 Base 都试一遍，看谁有进展。"""
+    """Base 家族连环解码：每轮把所有 Base 都试一遍，看谁有进展。"""
     from .flags import find_flags
     frontier = [([], text.strip())]
     results: list[tuple[list[str], str]] = []

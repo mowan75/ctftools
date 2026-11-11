@@ -460,8 +460,8 @@ def t_text_stego_and_crypto():
           str([f.title for f in found][:2]))
 
 
-def t_wzbc_techniques():
-    """校赛真题技法：ZIP 口令=文件名、文件时间戳编码、猫脸长方形、文件名提示。"""
+def t_techniques():
+    """常见技法：ZIP 口令=文件名、文件时间戳编码、猫脸长方形、文件名提示。"""
     import zipfile
     from ctfmisc import archive, image, forensic
     # 1) ZIP 口令 = 文件名（用 pyzipper 造一个真加密 zip 不现实 → 用 zipfile 的加密写入不可用，
@@ -512,8 +512,8 @@ def t_wzbc_techniques():
           str(hits[:1])[:60])
 
 
-def t_wzbc_crypto():
-    """校赛 Crypto 两题：Base 家族连环解码 + 复合模数椭圆曲线分解。"""
+def t_crypto_techniques():
+    """Crypto 技法：Base 家族连环解码 + 复合模数椭圆曲线分解。"""
     from ctfmisc import codec, crypto_ext as cx, docs
     import base64 as b64
     # Base 家族：flag → base64 → base32 两层，看能否自动串起来
@@ -538,8 +538,8 @@ def t_wzbc_crypto():
     n, x0, y0 = cx.ec_make_point(p, q, a, b, seed=2)
     f = cx.ec_factor_n(n, a, x0, y0, steps=500)
     check("复合模数 ECC 分解 n", f in (p, q), f"分解出 {f}")
-    check("校赛手册条目齐全", len(docs.WZBC_2025) >= 9 and "pyjail" in docs.PYJAIL_PAYLOADS,
-          f"{len(docs.WZBC_2025)} 条")
+    check("经典题型手册条目齐全", len(docs.TECHNIQUES) >= 9 and "pyjail" in docs.PYJAIL_PAYLOADS,
+          f"{len(docs.TECHNIQUES)} 条")
 
 
 def main() -> int:
@@ -548,8 +548,8 @@ def main() -> int:
                t_wav_lsb, t_pcap_http, t_filetype_and_carve, t_jpeg_coeff,
                t_crypto_ext, t_binary_pyc, t_image_extras,
                t_text_stego_and_crypto,
-               t_wzbc_techniques,
-               t_wzbc_crypto):
+               t_techniques,
+               t_crypto_techniques):
         try:
             fn()
         except Exception as exc:
